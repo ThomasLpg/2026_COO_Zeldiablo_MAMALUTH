@@ -3,16 +3,16 @@
 ## Membres du groupe
 
 Liste des membres du projet :
-- Prenom Nom adresse@etu.univ-lorraine
-- Prenom Nom adresse@etu.univ-lorraine
-- Prenom Nom adresse@etu.univ-lorraine
-- Prenom Nom adresse@etu.univ-lorraine
+- SCHELTIEN Mattéo 
+- Lepage Thomas 
+- Da Silva Lucas 
+- Deflou-Caron Maxime 
 
 Liste des adresses mail
-adresse@etu.univ-lorraine
-adresse@etu.univ-lorraine
-adresse@etu.univ-lorraine
-adresse@etu.univ-lorraine
+matteo.scheltien1@etu.univ-lorraine
+thomas.lepage8@etu.univ-lorraine
+lucas.da-silva7@etu.univ-lorraine
+maxime.deflou-caron1@etu.univ-lorraine
 
 ## Etat du projet
 
