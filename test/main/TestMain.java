@@ -14,7 +14,7 @@ class MainTest {
         // appel de la methode
         int val = m.retour();
         // verifications
-        assertEquals(val,1,"devrait etre egal à 1");
+        assertEquals(1, val,"devrait etre egal à 1");
     }
 
 }
