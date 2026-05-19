@@ -1,17 +1,17 @@
 # Fonctionnalités prévues version 1
 
-- fonctionnalité 1 : nom
-  - descriptif texte : [...]
+- fonctionnalité 1 :
+  - descriptif texte :
   - critères de validation :
-    - critère 1 [...]
-    - critère 2 [...]
-  - responsables : [...]
+    - critère 1
+    - critère 2
+  - responsables :
 
-- fonctionnalité 2 : nom
-  - descriptif texte : [...]
+- fonctionnalité 2 :
+  - descriptif texte : Le personnage perd des points de vie (pvs)
   - critères de validation :
-    - critère 1 [...]
-    - critère 2 [...]
+    - critère 1  
+    - critère 2
   - responsables : [...]
 
 [....]
