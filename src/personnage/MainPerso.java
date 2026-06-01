@@ -10,7 +10,7 @@ public class MainPerso {
     public static void main(String[] args) throws InterruptedException {
         Labyrinthe laby = new Labyrinthe(20, 20);
         Personnage personnage = new Personnage(10, 10, "Perrin", 100, 20);
-        JeuPerso jeu = new JeuPerso(1,1, personnage, laby);
+        JeuPerso jeu = new JeuPerso(personnage, laby);
 
         DessinPerso aff = new DessinPerso(jeu);
 
