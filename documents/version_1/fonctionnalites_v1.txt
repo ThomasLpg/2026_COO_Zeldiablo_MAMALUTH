@@ -1,61 +1,18 @@
 # Fonctionnalités prévues version 1
 
-- fonctionnalité 1 : deplacerPerso(String direction) :
-  - descriptif texte : Déplace le personnage sur l'axe x et y avec les touches 'zqsd'
-  - critères de validation :
-    - critère 1 Le personnage se déplace d'une case
-    - critère 2 Gestion des collisions
-  - responsables : Mattéo, Lucas, Maxime et Thomas
+- fonctionnalité 1 : Déplacer le personnage dans un labyrinthe
+      - descriptif texte :
+      Un personnage se déplace dans 8 directions dans un labyrinthe
+      Nous avons pour ce faire écrit les classes :
+        - Personnage :
+        - JeuPerso
+        - DessinPerso
+      - critères de validation :
+        - critère 1 : Pour le moment quand le personnage se deplace dans un mur la partie est terminé.
+        - critère 2 : Le personnage peut se déplace dans l'axe horizontale, verticale et en diagonal.
+      - responsables : Maxime, Thomas, Mattéo, Lucas
 
-- fonctionnalité 2 : subirDegat(int coupRecu) void :
-  - descriptif texte : Le personnage perd des points de vie (pvs)
-  - critères de validation :
-    - critère 1 : Il faut que le personnage soit en vie
-    - critère 2 : Mise à jour des pvs bien effectué
-  - responsables : [...]
-
-  - fonctionnalité 3 : attaquerPerso(int degat) :
-    - descriptif texte : Le personnage attaque un autre personnage
-    - critères de validation :
-      - critère 1 : Le personnage doit etre vivant
-      - critère 2 : Le personnage adverse subit les dégats voulu en fonction de la
-      situation
-    - responsables : [...]
-
-# Fonctionnalités moteur graphique
-
-
-- fonctionnalité 1 : void deplacer(Commande commande)
-  - descriptif texte : déplacer le personnage par rapport à des booléens commandes
-  - critères de validation :
-    - critère 1 : Le personnage se déplace dans une direction, comportant les diagonales
-    - critère 2 : Lorsque deux touches opposées sont pressées, le personnage ne bouge pas
-  - responsable : Mattéo
-
-- fonctionnalité 2 : void evoluer(Commande c)
-        - descriptif texte : faire évoluer la position du personnage à travers de deplacer(Commande commande)
-           - critères de validation :
-                - critère 1 :
-        - responsable : Thomas
-
-- fonctionnalité 3 : boolena etreFini()
-        - descriptif texte : gérer la fin du jeu
-           - critères de validation :
-                - critère 1 : Le jeu est fini si le personnage se trouve dans un mur
-        - responsable : Thomas
-
-- fonctionnalité 4 : void dessiner(BufferedImage image)
-        - descriptif texte : dessiner un cercle à la position du personnage
-           - critères de validation : Pas pour l'instant
-
-    - responsable : Lucas
-
-- fonctionnalité 5 : mainperso
-    - descriptif texte : lancer le jeu utilisant le moteur de jeux et les classes précédentes
-               - critères de validation : Pas pour l'instant
-
-    - responsable : Maxime
-
+- fonctionnalité 2 :
 
 # Bilan
 

@@ -5,8 +5,7 @@ import moteurJeu.MoteurGraphique;
 
 public class MainPerso {
     public static void main(String[] args) throws InterruptedException {
-
-        JeuPerso jeu = new JeuPerso(5, 5);
+        JeuPerso jeu = new JeuPerso(5,5);
         DessinPerso aff = new DessinPerso(jeu);
 
 
@@ -15,7 +14,6 @@ public class MainPerso {
         moteur.lancerJeu(400, 400);
 
         // lorsque le jeu est fini
-
 
     }
 }
