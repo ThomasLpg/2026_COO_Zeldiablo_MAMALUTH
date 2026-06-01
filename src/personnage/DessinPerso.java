@@ -20,12 +20,14 @@ public class DessinPerso implements DessinJeu {
     public void dessiner(BufferedImage image){
         Graphics2D g = (Graphics2D) image.getGraphics();
 
-
+        g.setColor(Color.BLUE);
         Personnage perso = jeu.getPj();
         int persoX = (perso.getX() - 1) * TAILLE;
         int persoY = (perso.getY() + 1) * TAILLE;
-        g.fillArc(persoX, persoY, TAILLE, TAILLE, 0, 360);
-        g.setColor(Color.BLUE);
+        g.fillOval(persoX, persoY, TAILLE, TAILLE);
+
         g.dispose();
+
+
     }
 }
