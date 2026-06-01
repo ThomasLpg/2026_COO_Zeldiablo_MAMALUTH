@@ -7,8 +7,12 @@ public class Personnage {
     private int x; //Position / coordonnée x
     private int y; //Position / coordonnée y
 
-    public void deplacer(boolean d, boolean g, boolean h, boolean b){
-        switch ("" + d + "-" + g + "-" + h + "-" + b){
+    public void deplacer(Commande commande){
+        boolean b = commande.bas;
+        boolean h = commande.haut;
+        boolean d = commande.droite;
+        boolean q = commande.gauche;
+        switch ("" + d + "-" + g + "-" + h + "-" + b){  
             case "true-false-false-false" :
                 x += 1;
                 break;
