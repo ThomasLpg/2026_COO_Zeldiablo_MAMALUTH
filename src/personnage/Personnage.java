@@ -28,31 +28,31 @@ public class Personnage {
                 break;
 
             case "false-false-true-false" :
-                y += 1;
-                break;
-
-            case "false-false-false-true" :
                 y -= 1;
                 break;
 
-            case "true-false-true-gauche" :
-                x += 1;
+            case "false-false-false-true" :
                 y += 1;
+                break;
+
+            case "true-false-true-false" :
+                x += 1;
+                y -= 1;
                 break;
 
             case "true-false-false-true" :
                 x += 1;
-                y -= 1;
+                y += 1;
                 break;
 
             case "false-true-true-false" :
                 x -= 1;
-                y += 1;
+                y -= 1;
                 break;
 
             case "false-true-false-true" :
                 x -= 1;
-                y -= 1;
+                y += 1;
                 break;
         }
     }
