@@ -5,11 +5,11 @@ import moteurJeu.Jeu;
 
 public class JeuPerso implements Jeu {
     private Personnage personnage;
-    private Labyrinthe labyrinthe = new Labyrinthe(10, 10);
+    private Labyrinthe laby;
 
-    public JeuPerso(int x, int y){
+    public JeuPerso(int x, int y , Personnage perso, Labyrinthe laby){
         this.personnage = new Personnage(x, y, null, 0, 0);
-        this.labyrinthe.construireMurs();
+        this.laby.construireMurs();
     }
 
 
@@ -34,13 +34,13 @@ public class JeuPerso implements Jeu {
         int[] cooSuivante = getSuivant(personnage.getX(), personnage.getY(), c);
         int cooSuivanteX = cooSuivante[0];
         int cooSuivanteY = cooSuivante [1];
-        if(!(labyrinthe.etreMur(cooSuivanteX, cooSuivanteY))){
+        if(!(laby.etreMur(cooSuivanteX, cooSuivanteY))){
             personnage.deplacer(c);
         }
     }
 
     public boolean etreFini(){
-        return this.labyrinthe.etreMur(personnage.getY(), personnage.getX());
+        return this.laby.etreMur(personnage.getY(), personnage.getX());
     }
 
     public Personnage getPj(){

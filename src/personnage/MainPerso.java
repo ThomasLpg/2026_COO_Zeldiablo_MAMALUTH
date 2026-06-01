@@ -1,4 +1,5 @@
 package personnage;
+import Roles.Role;
 import dessins.Dessins;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.Labyrinthe;
@@ -7,10 +8,12 @@ import moteurJeu.MoteurGraphique;
 
 public class MainPerso {
     public static void main(String[] args) throws InterruptedException {
-        JeuPerso jeu = new JeuPerso(1,1);
+        Labyrinthe laby = new Labyrinthe(20, 20);
+        Personnage personnage = new Personnage(10, 10, "Perrin", 100, 20);
+        JeuPerso jeu = new JeuPerso(1,1, personnage, laby);
+
         DessinPerso aff = new DessinPerso(jeu);
 
-        Labyrinthe laby = new Labyrinthe(10, 10);
         DessinLabyrinthe dessinLabyrinthe = new DessinLabyrinthe(laby);
 
         Dessins dess = new Dessins();
