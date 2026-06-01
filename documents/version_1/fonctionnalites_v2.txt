@@ -1,0 +1,19 @@
+# Fonctionnalités prévues version 2
+
+- fonctionnalité 1 : Collision avec les Murs
+  - descriptif texte :
+  - critères de validation :
+    - critère 1 : La collision fonctionne dans les 4 directions ;
+    - critère 2 :  Si la case est vide, le personnage avance.
+  - responsables : Maxime, Thomas
+
+
+- fonctionnalité 2 : Gestion des déplacements des monstres
+  - descriptif texte : Conception et développement des déplacements des monstres
+  qui seront aléatoires, tout en restant cohérant
+  - critères de validation :
+    - critère 1 : le monstre ne peut pas traverser les murs
+    - critère 2 : le monstre suit des trajectoire possible (il ne se téléporte pas)
+  - responsables : Lucas, Matteo
+
+
