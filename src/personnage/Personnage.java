@@ -1,31 +1,57 @@
 package personnage;
 
+import moteurJeu.Commande;
+
 public class Personnage {
 
     private int x; //Position / coordonnée x
     private int y; //Position / coordonnée y
-    private static final String GAUCHE = "gauche";
-    private static final String DROITE = "droite";
-    private static final String HAUT = "haut";
-    private static final String BAS = "bas";
 
-    public void deplacer(String commande){
-        switch (commande){
-            case GAUCHE :
-                x -= 1;
-                break;
-
-            case DROITE :
+    public void deplacer(boolean d, boolean g, boolean h, boolean b){
+        switch ("" + d + "-" + g + "-" + h + "-" + b){
+            case "true-false-false-false" :
                 x += 1;
                 break;
 
-            case HAUT :
+            case "false-true-false-false" :
+                x -= 1;
+                break;
+
+            case "false-false-true-false" :
+                y += 1;
+                break;
+
+            case "false-false-false-true" :
                 y -= 1;
                 break;
 
-            case BAS :
+            case "true-false-true-gauche" :
+                x += 1;
                 y += 1;
                 break;
+
+            case "true-false-false-true" :
+                x += 1;
+                y -= 1;
+                break;
+
+            case "false-true-true-false" :
+                x -= 1;
+                y += 1;
+                break;
+
+            case "false-true-false-true" :
+                x -= 1;
+                y -= 1;
+                break;
         }
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
     }
 }
