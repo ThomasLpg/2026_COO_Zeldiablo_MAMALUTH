@@ -6,25 +6,27 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class DessinLabyrinthe implements DessinJeu {
-
+    Labyrinthe labyrinthe;
     public static final int TAILLE = 1;
-    Labyrinthe laby;
 
-    public DessinLabyrinthe(Labyrinthe l){
-        this.laby = l;
+    public DessinLabyrinthe(Labyrinthe labyrinthe){
+        this.labyrinthe = labyrinthe;
     }
 
     public void dessiner(BufferedImage image){
         Graphics2D g = (Graphics2D) image.getGraphics();
-        for(int i = 0; i<laby.getMurs().length; i++){
-            for(int j = 0; j<laby.getMurs().length; j++){
-                boolean mur = laby.getMurs()[i][j];
-                if(mur == true){
-                    g.fillRect(i, j, TAILLE, TAILLE);
-                    g.setColor(Color.GRAY);
+        labyrinthe.construireMurs();
+        for(int i = 0; i<this.labyrinthe.getMurs().length; i++){
+            for(int j = 0; j<this.labyrinthe.getMurs().length; j++){
+                System.out.print(labyrinthe.getMurs()[i][j]);
+                if(this.labyrinthe.etreMur(i,j)){
+
+                    g.setColor(Color.BLACK);
+                    g.fillRect(i    , j, TAILLE, TAILLE);
+                    g.dispose();
                 }
             }
+            System.out.println("");
         }
-        g.dispose();
     }
 }
