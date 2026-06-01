@@ -1,14 +1,12 @@
 package personnage;
 
-import arkanoidJeu.ArkanoidDessin;
-import arkanoidJeu.ArkanoidJeu;
 import moteurJeu.MoteurGraphique;
 
-import java.util.Scanner;
 
 public class MainPerso {
     public static void main(String[] args) throws InterruptedException {
-        JeuPerso jeu = new JeuPerso();
+
+        JeuPerso jeu = new JeuPerso(5, 5);
         DessinPerso aff = new DessinPerso(jeu);
 
 
@@ -17,10 +15,7 @@ public class MainPerso {
         moteur.lancerJeu(400, 400);
 
         // lorsque le jeu est fini
-        System.out.println("Fin du Jeu - appuyer sur entree");
-        Scanner sc=new Scanner(System.in);
-        sc.nextLine();
-        System.exit(1);
+
 
     }
 }

@@ -7,6 +7,12 @@ public class Personnage {
     private int x; //Position / coordonnée x
     private int y; //Position / coordonnée y
 
+    public Personnage(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public Personnage(){}
     public void deplacer(Commande commande){
         boolean b = commande.bas;
         boolean h = commande.haut;
