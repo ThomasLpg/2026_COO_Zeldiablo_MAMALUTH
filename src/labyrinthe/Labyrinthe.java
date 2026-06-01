@@ -6,4 +6,8 @@ public class Labyrinthe {
     public Labyrinthe(int x, int y){
         this.murs = new boolean[y][x];
     }
+
+    public boolean etreMur(int x, int y){
+        return this.murs[y][x];
+    }
 }
