@@ -25,7 +25,7 @@ public class DessinPerso extends JeuPerso implements DessinJeu {
         Personnage perso = jeu.getPj();
         int persoX = (perso.getX() - 1) * TAILLE;
         int persoY = (perso.getY() + 1) * TAILLE;
-        g.fillRect(persoX, persoY, 3 * TAILLE, TAILLE / 4);
+        g.fillOval(persoX, persoY, 3 * TAILLE, TAILLE / 4);
 
         g.dispose();
     }
