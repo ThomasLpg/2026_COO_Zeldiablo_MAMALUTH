@@ -3,7 +3,7 @@ import labyrinthe.Labyrinthe;
 import moteurJeu.Commande;
 import moteurJeu.Jeu;
 
-public class JeuPerso extends Personnage implements Jeu {
+public class JeuPerso implements Jeu {
     private Personnage personnage;
     private Labyrinthe labyrinthe = new Labyrinthe(10, 10);
 
