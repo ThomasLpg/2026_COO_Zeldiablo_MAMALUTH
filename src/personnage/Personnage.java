@@ -1,18 +1,26 @@
 package personnage;
 
+import Roles.Role;
 import moteurJeu.Commande;
 
-public class Personnage {
+public class Personnage extends Role {
 
     private int x; //Position / coordonnée x
     private int y; //Position / coordonnée y
+    private String nom;
+    private int pv;
+    private int degats;
 
-    public Personnage(int x, int y){
+    public Personnage(int x, int y, String n, int p, int d){
+        super(n, p, d);
         this.x = x;
         this.y = y;
     }
 
-    public Personnage(){}
+    public Personnage(){
+        super();
+    }
+
     public void deplacer(Commande commande){
         boolean b = commande.bas;
         boolean h = commande.haut;
@@ -63,5 +71,28 @@ public class Personnage {
 
     public int getY() {
         return this.y;
+    }
+
+    public int subirDegats(int coup){
+        this.pv -= coup;
+        return coup;
+    }
+
+    public boolean etreMort(){
+        return(this.pv == 0);
+    }
+
+    public void ajouterVie(int vie){
+        this.pv += vie;
+    }
+
+    public String toString(){
+        String s = "";
+        s += "Nom: " + this.nom + ", pv: " + this.pv;
+        return s;
+    }
+
+    public void attaquer(Role r){
+        r.subirDegats(this.degats);
     }
 }

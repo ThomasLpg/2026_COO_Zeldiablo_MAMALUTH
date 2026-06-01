@@ -8,7 +8,7 @@ public class JeuPerso implements Jeu {
     private Labyrinthe labyrinthe = new Labyrinthe(10, 10);
 
     public JeuPerso(int x, int y){
-        this.personnage = new Personnage(x, y);
+        this.personnage = new Personnage(x, y, null, 0, 0);
         this.labyrinthe.construireMurs();
     }
 
