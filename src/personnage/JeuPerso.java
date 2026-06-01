@@ -12,7 +12,8 @@ public class JeuPerso extends Personnage implements Jeu {
     }
 
     public void evoluer(Commande c){
-        deplacer(c);
+        personnage.deplacer(c);
+
     }
 
     public boolean etreFini(){
