@@ -1,0 +1,114 @@
+@startuml
+
+class Personnage{
+- x
+- y
+Personnage(x,y)
+deplacer(commande): void
+getX() :int
+getY() :int
+}
+
+
+class Commande{
++gauche
++droite
++haut
++bas
+Commande(commandeACopier) :Commande
+}
+
+class InterfaceGraphique{
+-panel
+-controleur
+InterfaceGraphique(afficheurUtil,x,y)
+getControleur() :Controleur
+dessiner() :void
+}
+
+class MoteurGraphique{
+-jeu
+-gui
+-dessin
+MoteurGraphique(pJeu, pAffiche)
+lancerJeu(width,height) :void
+}
+
+class PanelDessin{
+-dessin
+-imageSuivante
+-imageEnCours
+-width
+-height
+PanelDessin(x,y,affiche)
+dessinerJeu() :void
+paint(g) :void
+
+}
+
+class Controleur{
+-commandeEnCours
+-commandeARetourner
+Controleur() 
+getCommande() :Commande
+KeyPressed(e) :void
+KeyRealesed(e) :void
+KeyTyped(e) :void
+}
+class Labyrinthe{
+- murs
+Labyrinthe(x,y)
+construireMurs() :void
+etreMur(x,y) :boolean
+getMurs() :boolean[][]
+}
+
+class JeuPerso{
+-personnages
+-labyrinthes
+JeuPerso(x,y)
+evoluer(c) :void
+etreFini() :boolean
+getPj() :Personnage
+}
+
+class Dessins{
++ liste
+ajouterDessin(dj) :void
+dessiner(image) :void
+}
+
+class DessinPerso{
++ TAILLE
+DessinPerso(j)
+dessiner(image) :void
+}
+
+class DessinLabyrinthe{
+DessinLabyrinthe(labyrinthe)
+dessiner(image) :void
+}
+
+interface Jeu{
+evoluer(commandeUser) :void
+etreFini() :boolean
+}
+
+interface DessinJeu{
+dessiner(image) :void
+}
+
+Dessins .down-> DessinJeu
+DessinPerso .down-> DessinJeu
+DessinLabyrinthe .down-> DessinJeu
+JeuPerso .left-> Jeu
+JeuPerso -up-> Personnage
+DessinPerso -left-> Personnage
+DessinLabyrinthe --> Labyrinthe
+Controleur --> Commande
+MoteurGraphique --> InterfaceGraphique
+MoteurGraphique -up-> Jeu 
+InterfaceGraphique --> PanelDessin
+InterfaceGraphique  --> Controleur
+
+@enduml
