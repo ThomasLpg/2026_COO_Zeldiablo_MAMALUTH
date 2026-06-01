@@ -12,8 +12,31 @@ public class JeuPerso implements Jeu {
         this.labyrinthe.construireMurs();
     }
 
+
+    public int[] getSuivant(int x, int y, Commande c){
+        if(c.bas){
+            y += 1;
+        }
+        if(c.haut){
+            y -= 1;
+        };
+        if(c.gauche){
+            x -=1;
+        };
+        if(c.droite){
+            x +=1;
+        };
+        int[] res = {x, y};
+        return res;
+    }
+
     public void evoluer(Commande c){
-        personnage.deplacer(c);
+        int[] cooSuivante = getSuivant(personnage.getX(), personnage.getY(), c);
+        int cooSuivanteX = cooSuivante[0];
+        int cooSuivanteY = cooSuivante [1];
+        if(!(labyrinthe.etreMur(cooSuivanteX, cooSuivanteY))){
+            personnage.deplacer(c);
+        }
     }
 
     public boolean etreFini(){

@@ -1,5 +1,4 @@
 package personnage;
-
 import moteurJeu.Commande;
 
 public class Personnage {
