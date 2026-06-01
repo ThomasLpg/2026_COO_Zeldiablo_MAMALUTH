@@ -9,6 +9,7 @@ public class JeuPerso extends Personnage implements Jeu {
 
     public JeuPerso(int x, int y){
         this.personnage = new Personnage(x, y);
+        this.labyrinthe.construireMurs();
     }
 
     public void evoluer(Commande c){

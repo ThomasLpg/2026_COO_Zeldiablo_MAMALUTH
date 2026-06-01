@@ -22,8 +22,8 @@ public class DessinPerso implements DessinJeu {
 
         g.setColor(Color.BLUE);
         Personnage perso = jeu.getPj();
-        int persoX = (perso.getX() - 1) * TAILLE;
-        int persoY = (perso.getY() + 1) * TAILLE;
+        int persoX = perso.getX() * TAILLE;
+        int persoY = perso.getY() * TAILLE;
         g.fillOval(persoX, persoY, TAILLE, TAILLE);
 
         g.dispose();
