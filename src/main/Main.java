@@ -13,7 +13,17 @@ public class Main {
      * simple helloWorld
      */
     public static void main(String[] args) {
-        System.out.println("HelloWorld");
+
+        int[][] bjr = {{1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}};
+
+        for (int i = 0; i < bjr.length; i++) {
+            for (int j = 0; j < bjr[i].length; j++) {
+                System.out.println(bjr[i][j]);
+
+            }
+        }
     }
 
 }

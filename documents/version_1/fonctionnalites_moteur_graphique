@@ -1,0 +1,37 @@
+# Fonctionnalités faites moteur graphique
+
+- fonctionnalité 1 : Personnage :
+  - descriptif texte : Classe du personnage avec la méthode déplacer
+  - critères de validation :
+    - critère 1 Le personnage se déplace dans une direction, comportant les diagonales
+  - responsable : Mattéo
+
+- fonctionnalité 2 : subirDegat(int coupRecu) void :
+  - descriptif texte : Le personnage perd des points de vie (pvs)
+  - critères de validation :
+    - critère 1 : Il faut que le personnage soit en vie
+    - critère 2 : Mise à jour des pvs bien effectué
+  - responsables : [...]
+
+  - fonctionnalité 3 : attaquerPerso(int degat) :
+    - descriptif texte : Le personnage attaque un autre personnage
+    - critères de validation :
+      - critère 1 : Le personnage doit etre vivant
+      - critère 2 : Le personnage adverse subit les dégats voulu en fonction de la
+      situation
+    - responsables : [...]
+
+
+
+[....]
+- fonctionnalité x :
+  - descriptif texte : [...]
+  - critères de validation :
+    - critère 1 [...]
+    - critère 2 [...]
+  - responsables : [...]
+
+
+# Bilan
+
+- Quelles fonctionnalités est validée ?

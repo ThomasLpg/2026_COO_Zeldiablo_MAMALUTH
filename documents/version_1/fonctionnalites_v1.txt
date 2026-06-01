@@ -22,15 +22,39 @@
       situation
     - responsables : [...]
 
+# Fonctionnalités moteur graphique
 
 
-[....]
-- fonctionnalité x :
-  - descriptif texte : [...]
+- fonctionnalité 1 : void deplacer(Commande commande)
+  - descriptif texte : déplacer le personnage par rapport à des booléens commandes
   - critères de validation :
-    - critère 1 [...]
-    - critère 2 [...]
-  - responsables : [...]
+    - critère 1 : Le personnage se déplace dans une direction, comportant les diagonales
+    - critère 2 : Lorsque deux touches opposées sont pressées, le personnage ne bouge pas
+  - responsable : Mattéo
+
+- fonctionnalité 2 : void evoluer(Commande c)
+        - descriptif texte : faire évoluer la position du personnage à travers de deplacer(Commande commande)
+           - critères de validation :
+                - critère 1 :
+        - responsable : Thomas
+
+- fonctionnalité 3 : boolena etreFini()
+        - descriptif texte : gérer la fin du jeu
+           - critères de validation :
+                - critère 1 : Le jeu est fini si le personnage se trouve dans un mur
+        - responsable : Thomas
+
+- fonctionnalité 4 : void dessiner(BufferedImage image)
+        - descriptif texte : dessiner un cercle à la position du personnage
+           - critères de validation : Pas pour l'instant
+
+    - responsable : Lucas
+
+- fonctionnalité 5 : mainperso
+    - descriptif texte : lancer le jeu utilisant le moteur de jeux et les classes précédentes
+               - critères de validation : Pas pour l'instant
+
+    - responsable : Maxime
 
 
 # Bilan
