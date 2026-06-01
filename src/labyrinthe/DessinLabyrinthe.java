@@ -12,7 +12,6 @@ public class DessinLabyrinthe implements DessinJeu {
     public DessinLabyrinthe(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
     }
-
     public void dessiner(BufferedImage image){
         Graphics2D g = (Graphics2D) image.getGraphics();
         g.setColor(Color.BLACK);
@@ -20,9 +19,7 @@ public class DessinLabyrinthe implements DessinJeu {
         for(int i = 0; i<this.labyrinthe.getMurs().length; i++){
             for(int j = 0; j<this.labyrinthe.getMurs()[i].length; j++){
                 if(this.labyrinthe.etreMur(i,j)){
-
                     g.fillRect(i*TAILLE, j*TAILLE, TAILLE, TAILLE);
-
                 }
             }
 
