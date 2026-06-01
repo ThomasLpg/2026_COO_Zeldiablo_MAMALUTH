@@ -11,8 +11,21 @@ public class Personnage {
 
     public void deplacer(String commande){
         switch (commande){
-            case "gauche" :
+            case GAUCHE :
+                x -= 1;
+                break;
+
+            case DROITE :
                 x += 1;
+                break;
+
+            case HAUT :
+                y -= 1;
+                break;
+
+            case BAS :
+                y += 1;
+                break;
         }
     }
 }
