@@ -1,7 +1,5 @@
 package Roles;
 
-import personnage.Personnage;
-
 public abstract class Role implements Victime{
 
     private String nom;

@@ -1,7 +1,5 @@
 package Roles;
 
-import personnage.Personnage;
-
 public class Monstre extends Role{
 
     private String nom;
