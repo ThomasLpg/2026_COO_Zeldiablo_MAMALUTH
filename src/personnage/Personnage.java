@@ -11,8 +11,8 @@ public class Personnage {
         boolean b = commande.bas;
         boolean h = commande.haut;
         boolean d = commande.droite;
-        boolean q = commande.gauche;
-        switch ("" + d + "-" + g + "-" + h + "-" + b){  
+        boolean g = commande.gauche;
+        switch ("" + d + "-" + g + "-" + h + "-" + b){
             case "true-false-false-false" :
                 x += 1;
                 break;
