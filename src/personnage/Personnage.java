@@ -97,6 +97,6 @@ public abstract class Personnage {
 
     public void dessiner(Graphics2D g, Color c){
         g.setColor(c);
-        g.fillOval(this.getX()*TAILLE, this.getY()*TAILLE, TAILLE, TAILLE);
+        g.fillOval(this.x*TAILLE, this.y*TAILLE, TAILLE, TAILLE);
     }
 }

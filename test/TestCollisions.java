@@ -8,6 +8,8 @@ import personnage.JeuPerso;
 import personnage.Personnage;
 
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -15,12 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCollisions {
     @Test
-    public void testDeplacementVide() {
-        Hero hero = new Hero(17, 1, "Lucas", 100, 10);
+    public void testDeplacementVide() throws IOException {
+
         Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
 
         JeuPerso jp = new JeuPerso( labyrinthe);
+        jp.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
 
 
         Commande commande = new Commande();
@@ -28,7 +31,7 @@ public class TestCollisions {
 
 
         jp.evoluer(commande);
-        assertEquals(18, hero.getX());
+        assertEquals(11, jp.getPj().getX());
 
 
     }

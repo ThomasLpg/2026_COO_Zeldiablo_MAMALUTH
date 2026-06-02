@@ -28,30 +28,33 @@ public class JeuPerso implements Jeu {
         BufferedReader br = new BufferedReader(fr);
         String ligne = br.readLine();
         char c;
-        int x = 0, nbmonstre = 0;
+        int y = 0, nbmonstre = 0;
         while (ligne != null){
             for (int i = 0; i < ligne.length() ; i++){
                 c = ligne.charAt(i);
                 switch (c){
                     case '#' :
-                        this.laby.getMurs()[x][i] = true;
+                        this.laby.getMurs()[i][y] = true;
                         break;
                     case '&' :
-                        this.personnage.add(new Hero(x, i, "Héros", 100, 10));
+                        this.personnage.add(new Hero(i, y, "Héros", 100, 10));
                         break;
                     case '€' :
-                        this.personnage.add(new Monstre(x, i, "Monstre " + nbmonstre, 30, 20));
+                        this.personnage.add(new Monstre(i, y, "Monstre " + nbmonstre, 30, 20));
                         nbmonstre++;
                     default:
-                        this.laby.getMurs()[x][i] = false;
+                        this.laby.getMurs()[i][y] = false;
                         break;
                 }
             }
-            x++;
+
+            y++;
             ligne = br.readLine();
         }
+        br.close();
     }
     public int[] getSuivant(int x, int y, Commande c){
+
         if(c.bas){
             y += 1;
         }
@@ -69,7 +72,8 @@ public class JeuPerso implements Jeu {
     }
 
     public void evoluer(Commande c){
-        int[] cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+        int[] cooSuivante = this.getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+
         int cooSuivanteX = cooSuivante[0];
         int cooSuivanteY = cooSuivante [1];
         if(!(laby.etreMur(cooSuivanteX, cooSuivanteY))){
