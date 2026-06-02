@@ -7,13 +7,20 @@ import static personnage.DessinPerso.TAILLE;
 public abstract class Personnage {
 
     private int x = 0; //Position / coordonnée x
-    private int y; //Position / coordonnée y
-    private String nom;
-    private int pv;
-    private int degats;
+    private int y = 0; //Position / coordonnée y
+    private String nom = "";
+    private int pv = 0 ;
+    private int degats = 0 ;
 
+    public Personnage(int x, int y, String n, int p, int d) {
+        this.x = x;
+        this.y = y;
+        this.nom = n;
+        this.pv = p;
+        this.degats = d;
+    }
 
-     public void deplacer(Commande commande){
+    public void deplacer(Commande commande){
         boolean b = commande.bas;
         boolean h = commande.haut;
         boolean d = commande.droite;
