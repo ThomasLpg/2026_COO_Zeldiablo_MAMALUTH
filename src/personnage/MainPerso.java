@@ -1,9 +1,6 @@
 package personnage;
-import Roles.Hero;
-import Roles.Monstre;
 import dessins.Dessins;
 import labyrinthe.DessinLabyrinthe;
-import labyrinthe.Labyrinthe;
 import moteurJeu.MoteurGraphique;
 
 import java.io.IOException;
@@ -12,7 +9,6 @@ import java.io.IOException;
 public class MainPerso {
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        Monstre monstre = new Monstre(15 , 15, "chien", 50, 10);
 
         JeuPerso jeu = new JeuPerso();
         jeu.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
