@@ -86,6 +86,11 @@ public class JeuPerso implements Jeu {
         boolean h = c.haut;
         boolean d = c.droite;
         boolean g = c.gauche;
+        for (Personnage p : this.personnage){
+            if (p instanceof Monstre){
+                ((Monstre) p).deplacerMonstre(p.getX(), p.getY(), this.laby);
+            }
+        }
         int[] cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
         int cooSuivanteX = cooSuivante[0];
         int cooSuivanteY = cooSuivante [1];
