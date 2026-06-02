@@ -11,15 +11,15 @@ import java.io.IOException;
 
 public class MainPerso {
     public static void main(String[] args) throws InterruptedException, IOException {
-        Labyrinthe laby = new Labyrinthe(20, 20);
+
         Monstre monstre = new Monstre(15 , 15, "chien", 50, 10);
 
-        JeuPerso jeu = new JeuPerso(laby);
+        JeuPerso jeu = new JeuPerso();
         jeu.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
 
         DessinPerso aff = new DessinPerso(jeu, jeu.getListePerso());
 
-        DessinLabyrinthe dessinLabyrinthe = new DessinLabyrinthe(laby);
+        DessinLabyrinthe dessinLabyrinthe = new DessinLabyrinthe(jeu.getLaby());
 
         Dessins dess = new Dessins();
         dess.ajouterDessin(aff);

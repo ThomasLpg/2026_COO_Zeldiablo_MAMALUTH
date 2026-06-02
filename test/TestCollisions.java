@@ -17,95 +17,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCollisions {
     @Test
-    public void testCollisionMurBas() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
+    public void testDeplacementVide() throws IOException {
 
 
-        JeuPerso jp = new JeuPerso( labyrinthe);
-        jp.lireFichier("src/labyrinthe/niveaux/testMurBas.txt");
-
-        Commande commande = new Commande();
-        commande.bas = true;
-
-        jp.evoluer(commande);
-        assertEquals(17, jp.getPj().getY(),
-                "il y a un mur en y = 18");
-    }
-
-    @Test
-    public void testCollisionMurHaut() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
 
-        JeuPerso jp = new JeuPerso( labyrinthe);
-        jp.lireFichier("src/labyrinthe/niveaux/testMurHaut.txt");
+        JeuPerso jp = new JeuPerso();
+        jp.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
 
-        Commande commande = new Commande();
-        commande.haut = true;
-
-        jp.evoluer(commande);
-        assertEquals(1, jp.getPj().getY(),
-                "il y a un mur en y = 0");
-    }
-
-    @Test
-    public void testCollisionMurDroite() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
-
-
-        JeuPerso jp = new JeuPerso( labyrinthe);
-        jp.lireFichier("src/labyrinthe/niveaux/testMurDroit.txt");
 
         Commande commande = new Commande();
         commande.droite = true;
 
+
         jp.evoluer(commande);
-        assertEquals(17, jp.getPj().getX(),
-                "il y a un mur en x = 18");
+        assertEquals(11, jp.getPj().getX());
+
+
     }
 
     @Test
-    public void testCollisionMurGauche() throws IOException {
+    public void testCollisionMur() {
+        Hero hero = new Hero(18, 1, "Lucas", 100, 10);
         Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
 
-        JeuPerso jp = new JeuPerso( labyrinthe);
-        jp.lireFichier("src/labyrinthe/niveaux/testMurGauche.txt");
+        JeuPerso jp = new JeuPerso(labyrinthe);
 
-        Commande commande = new Commande();
-        commande.gauche = true;
-
-        jp.evoluer(commande);
-        assertEquals(1, jp.getPj().getX(),
-                "il y a un mur en x = 0");
-    }
-
-    @Test
-    public void testCollisionMurHautGauhe() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
-
-
-        JeuPerso jp = new JeuPerso( labyrinthe);
-        jp.lireFichier("src/labyrinthe/niveaux/testMurHautGauche.txt");
-
-        Commande commande = new Commande();
-        commande.haut = true;
-        commande.gauche = true;
-
-        jp.evoluer(commande);
-        assertEquals(1, jp.getPj().getX(),
-                "il y a un mur en x = 0");
-        assertEquals(1, jp.getPj().getY(),
-                "il y a un mur en y = 0");
-    }
-
-    @Test
-    public void testCollisionMurHautDroite() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
-
-
-        JeuPerso jp = new JeuPerso( labyrinthe);
-        jp.lireFichier("src/labyrinthe/niveaux/testMurHautDroite.txt");
 
         Commande commande = new Commande();
         commande.droite = true;

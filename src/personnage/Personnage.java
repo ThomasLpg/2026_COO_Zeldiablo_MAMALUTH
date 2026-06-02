@@ -72,6 +72,8 @@ public abstract class Personnage {
         return this.y;
     }
 
+    public String getNom(){ return this.nom;}
+
     public int subirDegats(int coup){
         this.pv -= coup;
         return coup;
