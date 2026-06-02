@@ -39,18 +39,23 @@ public class TestCollisions {
     @Test
     public void testCollisionMur() {
         Hero hero = new Hero(18, 1, "Lucas", 100, 10);
+        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
 
-
-        JeuPerso jp = new JeuPerso();
+        JeuPerso jp = new JeuPerso(labyrinthe);
 
 
         Commande commande = new Commande();
         commande.droite = true;
-
+        commande.haut = true;
 
         jp.evoluer(commande);
-        assertEquals(18, hero.getX(), "Le mur est a x = 19, le personnage" +
-                "devrait rester en place");
+        assertEquals(17, jp.getPj().getX(),
+                "il y a un mur en x = 18");
+        assertEquals(1, jp.getPj().getY(),
+                "il y a un mur en y = 0");
     }
+
+
+
 }
