@@ -2,6 +2,10 @@ package Roles;
 
 import personnage.Personnage;
 
+import java.awt.*;
+
+import static personnage.DessinPerso.TAILLE;
+
 public class Monstre extends Personnage {
 
     private String nom;

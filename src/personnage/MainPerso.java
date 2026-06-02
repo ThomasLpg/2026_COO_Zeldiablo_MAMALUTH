@@ -1,5 +1,6 @@
 package personnage;
-import Roles.Role;
+import Roles.Hero;
+import Roles.Monstre;
 import dessins.Dessins;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.Labyrinthe;
@@ -9,10 +10,16 @@ import moteurJeu.MoteurGraphique;
 public class MainPerso {
     public static void main(String[] args) throws InterruptedException {
         Labyrinthe laby = new Labyrinthe(20, 20);
-        Personnage personnage = new Personnage(10, 10, "Perrin", 100, 20);
-        JeuPerso jeu = new JeuPerso(personnage, laby);
+        Hero hero = new Hero(10, 10, "Perrin", 100, 20);
+        System.out.println(hero.toString());
+        Monstre monstre = new Monstre(15 , 15, "chien", 50, 10);
+        System.out.println(monstre);
 
-        DessinPerso aff = new DessinPerso(jeu);
+        JeuPerso jeu = new JeuPerso(laby);
+        jeu.ajouterPerso(hero);
+        jeu.ajouterPerso(monstre);
+
+        DessinPerso aff = new DessinPerso(jeu, jeu.getListePerso());
 
         DessinLabyrinthe dessinLabyrinthe = new DessinLabyrinthe(laby);
 

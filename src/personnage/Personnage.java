@@ -1,9 +1,13 @@
 package personnage;
 
-import Roles.Role;
 import moteurJeu.Commande;
 
-public class Personnage extends Role {
+import java.awt.*;
+import java.util.ArrayList;
+
+import static personnage.DessinPerso.TAILLE;
+
+public class Personnage {
 
     private int x; //Position / coordonnée x
     private int y; //Position / coordonnée y
@@ -12,13 +16,15 @@ public class Personnage extends Role {
     private int degats;
 
     public Personnage(int x, int y, String n, int p, int d){
-        super(n, p, d);
+        this.nom = n;
+        this.pv = p;
+        this.degats = d;
         this.x = x;
         this.y = y;
     }
 
     public Personnage(){
-        super();
+
     }
 
     public void deplacer(Commande commande){
@@ -92,7 +98,12 @@ public class Personnage extends Role {
         return s;
     }
 
-    public void attaquer(Role r){
+    public void attaquer(Personnage r){
         r.subirDegats(this.degats);
+    }
+
+    public void dessiner(Graphics2D g, Color c){
+        g.setColor(c);
+        g.fillOval(this.getX()*TAILLE, this.getY()*TAILLE, TAILLE, TAILLE);
     }
 }

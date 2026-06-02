@@ -1,22 +1,53 @@
-package main;
-
+import Roles.Hero;
 import labyrinthe.Labyrinthe;
 import moteurJeu.Commande;
+import moteurJeu.DessinJeu;
+import moteurJeu.Jeu;
 import org.junit.jupiter.api.Test;
+import personnage.JeuPerso;
 import personnage.Personnage;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 
 
 public class TestCollisions {
     @Test
-    public void testCollisions(){
-        Personnage personnage = new Personnage(19, 1, "Lucas", 100, 10);
+    public void testDeplacementVide() {
+        Hero hero = new Hero(17, 1, "Lucas", 100, 10);
         Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
 
-        personnage.deplacer(commande);
+        JeuPerso jp = new JeuPerso( labyrinthe);
 
+
+        Commande commande = new Commande();
+        commande.droite = true;
+
+
+        jp.evoluer(commande);
+        assertEquals(18, hero.getX());
 
 
     }
 
+    @Test
+    public void testCollisionMur() {
+        Hero hero = new Hero(18, 1, "Lucas", 100, 10);
+        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
+
+
+        JeuPerso jp = new JeuPerso(labyrinthe);
+
+
+        Commande commande = new Commande();
+        commande.droite = true;
+
+
+        jp.evoluer(commande);
+        assertEquals(18, hero.getX(), "Le mur est a x = 19, le personnage" +
+                "devrait rester en place");
+    }
 }
