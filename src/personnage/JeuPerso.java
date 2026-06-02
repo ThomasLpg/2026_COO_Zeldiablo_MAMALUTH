@@ -22,13 +22,14 @@ public class JeuPerso implements Jeu {
         this.personnage.add(p);
     }
 
+
     public void lireFichier(String fichier) throws IOException {
         FileReader fr = new FileReader(fichier);
         BufferedReader br = new BufferedReader(fr);
         String ligne = br.readLine();
         ArrayList<String> liste_lignes = new ArrayList<>(0);
         char c;
-        int nbmonstre = 0, longmax = 0;
+        int nbmonstre = 1, longmax = 0;
 
         while (ligne != null){
             liste_lignes.add(ligne);
@@ -171,12 +172,19 @@ public class JeuPerso implements Jeu {
         return this.laby.etreMur(personnage.getFirst().getY(), personnage.getFirst().getX());
     }
 
+    public Personnage getPersonnage(String nom){
+        for (Personnage p : this.personnage){
+            if (p.getNom().equals(nom)) return p;
+        }
+        return null;
+    }
+
     public ArrayList<Personnage> getListePerso(){
         return this.personnage;
     }
 
     public Personnage getPj(){
-        return this.personnage.getFirst();
+        return this.getPersonnage("Héros");
     }
 
     public Labyrinthe getLaby(){
