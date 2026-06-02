@@ -7,3 +7,13 @@
     - critère 1 : Les murs, roles chargent aux endroits prévus
     - critère 2 : Choisir le niveau au démmarage (paramètre main)
   - responsables :
+
+- fonctionnalité 2 : Cases déclancheur
+  - descriptif texte : Lorsque une entité arrive sur certaines cases,
+  ces cases déclenchent un effet
+  - critères de validation :
+    - critère 1 : Les cases a effet sont traversable
+    - critère 2 : Lorsqu'un personnage (héros ou monstre)
+     marche sur cette case, elle déclenche immédiatement un effet
+    - critère 3 : L'effet est pour le moment un affichage dans la console
+  - responsables :
