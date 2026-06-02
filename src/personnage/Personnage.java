@@ -1,33 +1,19 @@
 package personnage;
-
 import moteurJeu.Commande;
-
 import java.awt.*;
-import java.util.ArrayList;
 
 import static personnage.DessinPerso.TAILLE;
 
-public class Personnage {
+public abstract class Personnage {
 
-    private int x; //Position / coordonnée x
+    private int x = 0; //Position / coordonnée x
     private int y; //Position / coordonnée y
     private String nom;
     private int pv;
     private int degats;
 
-    public Personnage(int x, int y, String n, int p, int d){
-        this.nom = n;
-        this.pv = p;
-        this.degats = d;
-        this.x = x;
-        this.y = y;
-    }
 
-    public Personnage(){
-
-    }
-
-    public void deplacer(Commande commande){
+     public void deplacer(Commande commande){
         boolean b = commande.bas;
         boolean h = commande.haut;
         boolean d = commande.droite;
