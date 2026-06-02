@@ -109,6 +109,8 @@ public class JeuPerso implements Jeu {
                         personnage.getFirst().deplacer(c);
                     }
                 }
+                break;
+
             case "true-false-false-true":
                 c.bas = false;
                 cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
@@ -126,6 +128,7 @@ public class JeuPerso implements Jeu {
                         personnage.getFirst().deplacer(c);
                     }
                 }
+                break;
             case "false-true-true-false":
                 c.haut = false;
                 cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
@@ -143,6 +146,7 @@ public class JeuPerso implements Jeu {
                         personnage.getFirst().deplacer(c);
                     }
                 }
+                break;
             case "false-true-false-true":
                 c.bas = false;
                 cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
@@ -160,6 +164,7 @@ public class JeuPerso implements Jeu {
                         personnage.getFirst().deplacer(c);
                     }
                 }
+                break;
         }
     }
 
