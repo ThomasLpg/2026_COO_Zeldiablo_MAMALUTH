@@ -72,12 +72,84 @@ public class JeuPerso implements Jeu {
     }
 
     public void evoluer(Commande c){
-        int[] cooSuivante = this.getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
-
+        boolean b = c.bas;
+        boolean h = c.haut;
+        boolean d = c.droite;
+        boolean g = c.gauche;
+        int[] cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
         int cooSuivanteX = cooSuivante[0];
         int cooSuivanteY = cooSuivante [1];
         if(!(laby.etreMur(cooSuivanteX, cooSuivanteY))){
             personnage.getFirst().deplacer(c);
+        } else switch("" + d + "-" + g + "-" + h + "-" + b){
+            case"true-false-true-false":
+                c.haut = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                    personnage.getFirst().deplacer(c);
+                }else{
+                    c.haut = true;
+                    c.droite = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if (!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                        personnage.getFirst().deplacer(c);
+                    }
+                }
+            case "true-false-false-true":
+                c.bas = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                    personnage.getFirst().deplacer(c);
+                }else{
+                    c.bas = true;
+                    c.droite = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if (!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                        personnage.getFirst().deplacer(c);
+                    }
+                }
+            case "false-true-true-false":
+                c.haut = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                    personnage.getFirst().deplacer(c);
+                }else{
+                    c.haut = true;
+                    c.gauche = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if (!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                        personnage.getFirst().deplacer(c);
+                    }
+                }
+            case "false-true-false-true":
+                c.bas = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                    personnage.getFirst().deplacer(c);
+                }else{
+                    c.bas = true;
+                    c.gauche = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if (!(laby.etreMur(cooSuivanteX, cooSuivanteY))) {
+                        personnage.getFirst().deplacer(c);
+                    }
+                }
         }
     }
 
