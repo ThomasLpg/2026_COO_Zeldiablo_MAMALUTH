@@ -1,8 +1,13 @@
 package personnage;
+import Roles.Hero;
+import Roles.Monstre;
 import labyrinthe.Labyrinthe;
 import moteurJeu.Commande;
 import moteurJeu.Jeu;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class JeuPerso implements Jeu {
@@ -12,13 +17,40 @@ public class JeuPerso implements Jeu {
     public JeuPerso(Labyrinthe laby){
         this.personnage = new ArrayList<>(0);
         this.laby = laby;
-        laby.construireMurs();
     }
 
     public void ajouterPerso(Personnage p){
         this.personnage.add(p);
     }
 
+    public void lireFichier(String fichier) throws IOException {
+        FileReader fr = new FileReader(fichier);
+        BufferedReader br = new BufferedReader(fr);
+        String ligne = br.readLine();
+        char c;
+        int x = 0, nbmonstre = 0;
+        while (ligne != null){
+            for (int i = 0; i < ligne.length() ; i++){
+                c = ligne.charAt(i);
+                switch (c){
+                    case '#' :
+                        this.laby.getMurs()[x][i] = true;
+                        break;
+                    case '&' :
+                        this.personnage.add(new Hero(x, i, "Héros", 100, 10));
+                        break;
+                    case '€' :
+                        this.personnage.add(new Monstre(x, i, "Monstre " + nbmonstre, 30, 20));
+                        nbmonstre++;
+                    default:
+                        this.laby.getMurs()[x][i] = false;
+                        break;
+                }
+            }
+            x++;
+            ligne = br.readLine();
+        }
+    }
     public int[] getSuivant(int x, int y, Commande c){
         if(c.bas){
             y += 1;
