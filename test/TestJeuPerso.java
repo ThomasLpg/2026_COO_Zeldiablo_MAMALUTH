@@ -17,9 +17,9 @@ public class TestJeuPerso {
     @Test
     public void testLireFichier() {
         // Initialisation d'un labyrinthe de 20 par 20
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
-        JeuPerso jp = new JeuPerso(labyrinthe);
+
+        JeuPerso jp = new JeuPerso();
 
         try {
             jp.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
@@ -47,10 +47,9 @@ public class TestJeuPerso {
 
     @Test
     public void testEtreMur(){
-        // Initialisation d'un labyrinthe de 20 par 20
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
-        JeuPerso jp = new JeuPerso(labyrinthe);
+
+        JeuPerso jp = new JeuPerso();
 
         try {
             jp.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
@@ -58,7 +57,7 @@ public class TestJeuPerso {
             System.out.println("Erreur dans la lecture de fichier...");
         }
         // Récupération d'un éventuel mur
-        boolean mur = labyrinthe.etreMur(0, 0);
+        boolean mur = jp.getLaby().etreMur(0, 0);
 
         // Vérification
         assertTrue(mur);

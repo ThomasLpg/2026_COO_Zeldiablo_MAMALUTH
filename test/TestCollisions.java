@@ -19,10 +19,10 @@ public class TestCollisions {
     @Test
     public void testDeplacementVide() throws IOException {
 
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
 
-        JeuPerso jp = new JeuPerso( labyrinthe);
+
+        JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
 
 
@@ -39,10 +39,10 @@ public class TestCollisions {
     @Test
     public void testCollisionMur() {
         Hero hero = new Hero(18, 1, "Lucas", 100, 10);
-        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
 
-        JeuPerso jp = new JeuPerso(labyrinthe);
+
+        JeuPerso jp = new JeuPerso();
 
 
         Commande commande = new Commande();

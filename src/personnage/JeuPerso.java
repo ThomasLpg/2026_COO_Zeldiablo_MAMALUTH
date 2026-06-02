@@ -14,9 +14,8 @@ public class JeuPerso implements Jeu {
     private ArrayList<Personnage> personnage;
     private Labyrinthe laby;
 
-    public JeuPerso(Labyrinthe laby){
+    public JeuPerso(){
         this.personnage = new ArrayList<>(0);
-        this.laby = laby;
     }
 
     public void ajouterPerso(Personnage p){
@@ -27,19 +26,30 @@ public class JeuPerso implements Jeu {
         FileReader fr = new FileReader(fichier);
         BufferedReader br = new BufferedReader(fr);
         String ligne = br.readLine();
+        ArrayList<String> liste_lignes = new ArrayList<>(0);
         char c;
-        int y = 0, nbmonstre = 0;
+        int nbmonstre = 0, longmax = 0;
+
         while (ligne != null){
-            for (int i = 0; i < ligne.length() ; i++){
-                c = ligne.charAt(i);
-                switch (c){
-                    case '#' :
+            liste_lignes.add(ligne);
+            System.out.println(ligne.length());
+            if (ligne.length() > longmax) longmax = ligne.length();
+            ligne = br.readLine();
+        }
+        br.close();
+        this.laby = new Labyrinthe(liste_lignes.size(), longmax);
+        System.out.println(longmax);
+        for (int y = 0 ; y < liste_lignes.size() ; y++){
+            for (int i = 0; i < liste_lignes.get(y).length() ; i++) {
+                c = liste_lignes.get(y).charAt(i);
+                switch (c) {
+                    case '#':
                         this.laby.getMurs()[i][y] = true;
                         break;
-                    case '&' :
+                    case '&':
                         this.personnage.add(new Hero(i, y, "Héros", 100, 10));
                         break;
-                    case '€' :
+                    case '€':
                         this.personnage.add(new Monstre(i, y, "Monstre " + nbmonstre, 30, 20));
                         nbmonstre++;
                     default:
@@ -47,11 +57,10 @@ public class JeuPerso implements Jeu {
                         break;
                 }
             }
-
-            y++;
-            ligne = br.readLine();
         }
-        br.close();
+
+
+
     }
     public int[] getSuivant(int x, int y, Commande c){
 
@@ -91,5 +100,9 @@ public class JeuPerso implements Jeu {
 
     public Personnage getPj(){
         return this.personnage.getFirst();
+    }
+
+    public Labyrinthe getLaby(){
+        return this.laby;
     }
 }
