@@ -1,0 +1,9 @@
+# Fonctionnalités prévues version 3
+
+- fonctionnalité 1 : Gestion des niveaux
+  - descriptif texte : Pouvoir créer des niveaux à partir d'un fichier texte et
+  de les chargers
+  - critères de validation :
+    - critère 1 : Les murs, roles chargent aux endroits prévus
+    - critère 2 : Choisir le niveau au démmarage (paramètre main)
+  - responsables :

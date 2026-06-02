@@ -1,6 +1,6 @@
 package Roles;
 
-public abstract class Role implements Victime{
+public abstract class Role{
 
     private String nom;
     private int pv;
