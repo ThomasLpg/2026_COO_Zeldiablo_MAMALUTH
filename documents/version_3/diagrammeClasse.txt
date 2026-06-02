@@ -1,0 +1,79 @@
+@startuml
+class JeuPerso{
+-listePersonnage : ArrayList<Personnage>
+-laby : Labyrinthe
+--
++JeuPerso(laby : Labyrinthe)
+--
++getSuivant(x : int, y :int) : int[][]
++evoluer(c: Commande) :
++etreFini(): boolean
++getPj : Personnage
+}
+
+class Labyrinthe{
+-murs : boolean[][]
+--
++Labyrinthe(x:int, y:int)
+--
++construireMurs() :
++etreMur(): boolean
++getMurs() : boolean[][]
+}
+
+class Personnage{
+-x :int
+-y :int
+-nom :String
+-pv :int
+-degats :int
+--
++Personnage(x:int, y:int, n:String, p:int, d:int)
++Personnage()
+--
++deplacer(commande : Commande) :
++getX : int
++getY: int
++subirDegats(coup : int)
++etreMort() : boolean
++ajouterVie(vie :int) :
++attaquer(r : Role) :
++toString : String
+
+}
+
+interface Jeu{
++evoluer(commande : CommandeUser) :
++etreFini() : boolean
+}
+
+
+class Monstre{
+-nom :String
+-pv :int
+-degats :int
+--
++Monstre(n : String, p :int, d : int)
+}
+
+
+class Hero{
+-nom :String
+-pv :int
+-degats :int
+--
++Monstre(n : String, p :int, d : int)
+}
+
+
+JeuPerso .up.|> Jeu
+JeuPerso --> Labyrinthe
+JeuPerso --> Monstre
+JeuPerso --> Hero
+
+Monstre --|> Personnage
+Hero --|> Personnage
+
+
+
+@enduml
