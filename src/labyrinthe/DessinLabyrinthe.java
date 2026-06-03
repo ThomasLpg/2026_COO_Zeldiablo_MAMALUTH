@@ -9,9 +9,18 @@ public class DessinLabyrinthe implements DessinJeu {
     Labyrinthe labyrinthe;
     public static final int TAILLE = 20;
 
+    /**
+     * Permet de definir le labyrinthe à dessiner
+     * @param labyrinthe
+     */
     public DessinLabyrinthe(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
     }
+
+    /**
+     * Appelle la méthode dessiner de Dessins pour dessiner le labyrinthe
+     * @param image
+     */
     public void dessiner(BufferedImage image){
         Graphics2D g = (Graphics2D) image.getGraphics();
 

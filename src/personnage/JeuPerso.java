@@ -17,15 +17,29 @@ public class JeuPerso implements Jeu {
     private ArrayList<Personnage> personnage;
     private Labyrinthe laby;
     private ArrayList<Portail> portails = new ArrayList<>(0);
+
+    /**
+     * Constructeur de Personnage, est une arrayList qui augmentera de capacité
+     * à chaque Personnage ajouté
+     */
     public JeuPerso(){
         this.personnage = new ArrayList<>(0);
     }
+
+    /**
+     * Ajoute un nouveau personnage à la liste de Personnage
+     * @param p personnage à ajouter
+     */
     public JeuPerso(Personnage p) {this.personnage.set(0, p);}
     public void ajouterPerso(Personnage p){
         this.personnage.add(p);
     }
 
-
+    /**
+     * lis le fichier txt qui définie un niveau, dans lequel se trouve des murs, un heros, des monstres
+     * @param fichier txt à lire
+     * @throws IOException
+     */
     public void lireFichier(String fichier) throws IOException {
         this.personnage = new ArrayList<>(0);
         this.laby = null;
@@ -80,6 +94,16 @@ public class JeuPerso implements Jeu {
         this.personnage.addFirst(h);
 
     }
+
+    /**
+     * Permet d'obtenir la case suivante, en prenant une commande, on sait dans quelle direction le personnage
+     * veut se déplacer, on prend la case dans cette direction
+     *
+     * @param x coordonnée x du personnage
+     * @param y coordonnée y du personnage
+     * @param c direction dans laquelle le personnage veut aller
+     * @return un tableau des coordonnées de la case suivante par rapport à la commande
+     */
     public int[] getSuivant(int x, int y, Commande c){
 
         if(c.bas){
@@ -98,7 +122,12 @@ public class JeuPerso implements Jeu {
         return res;
     }
 
-
+    /**
+     * Regarde ce qui se trouve dans la case en x y
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     * @return true si la case est vide, false si il quelque chose est dedans
+     */
     public int deplacementPossible(int x, int y){
 
 
@@ -111,7 +140,15 @@ public class JeuPerso implements Jeu {
         return 10;
     }
 
-
+    /**
+     * Vérifie si on peut se déplacer dans la case suivante, utilise la méthode getSuivant pour
+     * obtenir les coordonnées de la case suivante, et deplacementPossible pour savoir ce qui se
+     * trouve dans cette case
+     * @param x coordonnée x de la case suivante
+     * @param y coordonnée y de la case suivante
+     * @param c Commande pour savoir dans quelle direction est la case suivante
+     * @return boolean True si le deplacement dans la case suivante est possible, false sinon
+     */
     public int verifsuivant(int x, int y, Commande c){
 
         int[] cooSuivante = this.getSuivant(x, y, c);
@@ -119,7 +156,10 @@ public class JeuPerso implements Jeu {
 
     }
 
-
+    /**
+     * Permet de déplacer le personnage (heros ou monstre), si verifSuivant
+     * @param c commande utilisateur
+     */
     public void evoluer(Commande c){
         Personnage p = this.personnage.getFirst();
 
