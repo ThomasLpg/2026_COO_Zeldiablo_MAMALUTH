@@ -2,6 +2,7 @@ package personnage;
 import Roles.Hero;
 import Roles.Monstre;
 import jdk.jshell.execution.JdiExecutionControlProvider;
+import labyrinthe.DessinLabyrinthe;
 import labyrinthe.Labyrinthe;
 import labyrinthe.Portail;
 import moteurJeu.Commande;
@@ -72,6 +73,10 @@ public class JeuPerso implements Jeu {
     public void recharger(String nomFichier) throws IOException {
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
+        DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
+        DessinPerso dp = new DessinPerso(this, this.personnage);
+        JeuPrincipal.liste_dessins.ajouterDessin(ds);
+        JeuPrincipal.liste_dessins.ajouterDessin(dp);
         this.personnage.addFirst(h);
 
     }
