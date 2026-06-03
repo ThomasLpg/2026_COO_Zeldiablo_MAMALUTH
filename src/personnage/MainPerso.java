@@ -1,5 +1,6 @@
 package personnage;
 import dessins.Dessins;
+import items.DessinItem;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.DessinPortail;
 import labyrinthe.Portail;
@@ -21,12 +22,15 @@ public class MainPerso {
 
         DessinLabyrinthe dessinLabyrinthe = new DessinLabyrinthe(jeu.getLaby());
 
+        DessinItem dessinItem = new DessinItem(jeu, jeu.getListeItems());
+
         DessinPortail dessinPortail = new DessinPortail(jeu, jeu.getListePortails());
         Dessins dess = new Dessins();
 
         dess.ajouterDessin(dessinLabyrinthe);
         dess.ajouterDessin(aff);
         dess.ajouterDessin(dessinPortail);
+        dess.ajouterDessin(dessinItem);
 
 
 
