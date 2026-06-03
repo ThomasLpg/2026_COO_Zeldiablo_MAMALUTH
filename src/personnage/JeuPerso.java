@@ -1,7 +1,6 @@
 package personnage;
 import Roles.Hero;
 import Roles.Monstre;
-import jdk.jshell.execution.JdiExecutionControlProvider;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.Labyrinthe;
 import labyrinthe.Portail;
@@ -129,8 +128,6 @@ public class JeuPerso implements Jeu {
      * @return true si la case est vide, false si il quelque chose est dedans
      */
     public int deplacementPossible(int x, int y){
-
-
         if(this.laby.etreMur(x, y)) return 0;
 
         if(this.etrePersonnage(x, y)) return 1;
@@ -163,6 +160,8 @@ public class JeuPerso implements Jeu {
     public void evoluer(Commande c){
         Personnage p = this.personnage.getFirst();
 
+
+        //Si c'est un portail, le jeux est rechagé vers le niveau voulu
         if (verifsuivant(p.getX(), p.getY(), c) == 2) {
             try {
                 System.out.println("Bonjour");
@@ -172,15 +171,30 @@ public class JeuPerso implements Jeu {
             }
         }
 
+        //Si c'est un personnage, il attaque le personnage en lui infligeant son
+        //nombre de dégats en attribut
+        if(verifsuivant(p.getX(), p.getY(), c) == 1){
+            int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
+            Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
+            p.attaquer(pAttaque);
+        }
+
+        //Si c'est du vide, il s'y déplace librement
         if (verifsuivant(p.getX(), p.getY(), c) == 10) {
             p.deplacer(c);
         } else {
             deplacerDiagonale(c);
         }
 
+
         for (int i = 1; i < this.personnage.size(); i++) {
             p = this.personnage.get(i);
             Commande cMonstre = ((Monstre) p).directionAleatoire();
+            if(verifsuivant(p.getX(), p.getY(), cMonstre) == 1){
+                int cooSuivante[] = getSuivant(p.getX(), p.getY(),cMonstre);
+                Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
+                p.attaquer(pAttaque);
+            }
             if (verifsuivant(p.getX(), p.getY(), cMonstre) == 10) {
                 p.deplacer(cMonstre);
             }
@@ -224,6 +238,17 @@ public class JeuPerso implements Jeu {
             }
         }
         return perso;
+    }
+
+    public Personnage personnageSurCetteCase(int x, int y){
+        for(Personnage p : this.personnage){
+            if(p.getX() == x && p.getY() == y){
+                System.out.println(p);
+                return p;
+            }
+        }
+        System.out.println("personne");
+        return null;
     }
 
     public boolean etrePortail(int x, int y){
