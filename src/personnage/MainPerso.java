@@ -11,8 +11,13 @@ import java.io.IOException;
 
 
 public class MainPerso {
+    /**
+     * Permet de lancer le jeu entier, avec les personnages, les niveaux, les portails
+     * @param args
+     * @throws InterruptedException
+     * @throws IOException
+     */
     public static void main(String[] args) throws InterruptedException, IOException {
-
 
 
         JeuPerso jeu = new JeuPerso();

@@ -50,6 +50,10 @@ public class Portail implements DessinJeu {
         return y;
     }
 
+    /**
+     * Getter de l'orientation du portail
+     * @return String haut / bas / gauche / droite
+     */
     public String getOrientation(){
         return this.orientation;
     }
