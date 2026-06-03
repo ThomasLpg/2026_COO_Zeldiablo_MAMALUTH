@@ -38,10 +38,18 @@ public class JeuPerso implements Jeu {
      */
     public JeuPerso(Personnage p) {this.personnage.set(0, p);}
 
+    /**
+     * Permet d'ajouter un personnage p à la liste de Personnage
+     * @param p personnage à ajouter
+     */
     public void ajouterPerso(Personnage p){
         this.personnage.add(p);
     }
 
+    /**
+     * Permet d'ajouter un item à la liste d'item
+     * @param i item à ajouter
+     */
     public void ajouterItem(Item i){this.items.add(i);}
 
     /**
@@ -338,6 +346,12 @@ public class JeuPerso implements Jeu {
         return perso;
     }
 
+    /**
+     * Vérifie si un Personnage est sur la case dont les coordonnées sont données
+     * @param x coordonnées x de la case qu'on veut vérifier
+     * @param y coordonnées y de la case qu'on veut vérifier
+     * @return
+     */
     public Personnage personnageSurCetteCase(int x, int y){
         for(Personnage p : this.personnage){
             if(p.getX() == x && p.getY() == y){
@@ -366,6 +380,11 @@ public class JeuPerso implements Jeu {
         return port;
     }
 
+    /**
+     * Vérifie si la case suivante est un item (case avec un item dessus)
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     */
     public void etreItem(int x, int y){
         boolean isItem = false;
         for(Item i: this.items){
