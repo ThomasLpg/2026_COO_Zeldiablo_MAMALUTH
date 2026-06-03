@@ -1,6 +1,7 @@
 package personnage;
 import Roles.Hero;
 import Roles.Monstre;
+import items.Epee;
 import items.Item;
 import jdk.jshell.execution.JdiExecutionControlProvider;
 import labyrinthe.DessinLabyrinthe;
@@ -18,7 +19,7 @@ public class JeuPerso implements Jeu {
     private ArrayList<Personnage> personnage;
     private Labyrinthe laby;
     private ArrayList<Portail> portails = new ArrayList<>(0);
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<>(0);
 
     /**
      * Constructeur de Personnage, est une arrayList qui augmentera de capacité
@@ -82,7 +83,17 @@ public class JeuPerso implements Jeu {
                         this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau2.txt", "droite"));
                         break;
                     case '_':
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "bas"));
+                        break;
+                    case '}':
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "gauche"));
+                        break;
+                    case '-':
                         this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "haut"));
+                        break;
+                    case '/':
+                        System.out.println("bijr");
+                        this.items.add(new Epee(x, y, 50));
                         break;
                     default:
                         this.laby.getMurs()[y][x] = false;
