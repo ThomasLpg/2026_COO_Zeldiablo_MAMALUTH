@@ -92,7 +92,7 @@ public class JeuPerso implements Jeu {
                         this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "haut"));
                         break;
                     case '/':
-                        System.out.println("bijr");
+
                         this.items.add(new Epee(x, y, 50));
                         break;
                     default:
@@ -144,8 +144,7 @@ public class JeuPerso implements Jeu {
         if(c.droite){
             x +=1;
         };
-        int[] res = {x, y};
-        return res;
+        return new int[]{x, y};
     }
 
     /**
@@ -176,6 +175,7 @@ public class JeuPerso implements Jeu {
     public int verifsuivant(int x, int y, Commande c){
 
         int[] cooSuivante = this.getSuivant(x, y, c);
+
         return deplacementPossible(cooSuivante[0], cooSuivante[1]);
 
     }
@@ -186,27 +186,32 @@ public class JeuPerso implements Jeu {
      */
     public void evoluer(Commande c){
         Personnage p = this.personnage.getFirst();
+        if (c.bas || c.haut || c.gauche || c.droite){
+            //Si c'est un portail, le jeu est rechargé vers le niveau voulu
+            if (verifsuivant(p.getX(), p.getY(), c) == 2) {
+                try {
+                    int[] cp = this.getSuivant(p.getX(), p.getY(), c);
+                    p.prendrePortail(this.getPortail(cp[0], cp[1]), this.laby);
+                    this.recharger(this.getListePortails().getFirst().getDestination());
 
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
-        //Si c'est un portail, le jeux est rechagé vers le niveau voulu
-        if (verifsuivant(p.getX(), p.getY(), c) == 2) {
-            try {
-                int[] cp = this.getSuivant(p.getX(), p.getY(), c);
-                p.prendrePortail(this.getPortail(cp[0], cp[1]), this.laby);
-                this.recharger(this.getListePortails().getFirst().getDestination());
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            //Si c'est un personnage, il attaque le personnage en lui infligeant son
+            //nombre de dégats en attribut
+            if(verifsuivant(p.getX(), p.getY(), c) == 1){
+                int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
+                Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
+                p.attaquer(pAttaque);
+                System.out.println("pv du hero : " + p.getPv());
+                System.out.println("pv du Monstre attaqué : " + pAttaque.getPv());
             }
         }
 
-        //Si c'est un personnage, il attaque le personnage en lui infligeant son
-        //nombre de dégats en attribut
-        if(verifsuivant(p.getX(), p.getY(), c) == 1){
-            int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
-            Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
-            p.attaquer(pAttaque);
-        }
+
+
 
         //Si c'est du vide, il s'y déplace librement
         if (verifsuivant(p.getX(), p.getY(), c) == 10) {
@@ -219,13 +224,15 @@ public class JeuPerso implements Jeu {
         for (int i = 1; i < this.personnage.size(); i++) {
             p = this.personnage.get(i);
             Commande cMonstre = ((Monstre) p).directionAleatoire();
-            if(verifsuivant(p.getX(), p.getY(), cMonstre) == 1){
-                int cooSuivante[] = getSuivant(p.getX(), p.getY(),cMonstre);
-                Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
-                p.attaquer(pAttaque);
-            }
-            if (verifsuivant(p.getX(), p.getY(), cMonstre) == 10) {
-                p.deplacer(cMonstre);
+            if (cMonstre.bas || cMonstre.haut || cMonstre.gauche || cMonstre.droite) {
+                if (verifsuivant(p.getX(), p.getY(), cMonstre) == 1) {
+                    int cooSuivante[] = getSuivant(p.getX(), p.getY(), cMonstre);
+                    Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
+                    p.attaquer(pAttaque);
+                }
+                if (verifsuivant(p.getX(), p.getY(), cMonstre) == 10) {
+                    p.deplacer(cMonstre);
+                }
             }
         }
     }
@@ -302,7 +309,7 @@ public class JeuPerso implements Jeu {
     public boolean etrePersonnage(int x, int y){
         boolean perso = false;
         for(Personnage p : this.personnage){
-            if (p.getX() == x && p.getY() == y) {
+            if ((p.getX() == x) && (p.getY() == y)) {
                 perso = true;
                 break;
             }
@@ -313,11 +320,11 @@ public class JeuPerso implements Jeu {
     public Personnage personnageSurCetteCase(int x, int y){
         for(Personnage p : this.personnage){
             if(p.getX() == x && p.getY() == y){
-                System.out.println(p);
+
                 return p;
             }
         }
-        System.out.println("personne");
+
         return null;
     }
 
