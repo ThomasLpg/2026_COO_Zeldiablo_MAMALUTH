@@ -3,6 +3,7 @@ import Roles.Hero;
 import Roles.Monstre;
 import jdk.jshell.execution.JdiExecutionControlProvider;
 import labyrinthe.Labyrinthe;
+import labyrinthe.Portail;
 import moteurJeu.Commande;
 import moteurJeu.Jeu;
 
@@ -14,17 +15,20 @@ import java.util.ArrayList;
 public class JeuPerso implements Jeu {
     private ArrayList<Personnage> personnage;
     private Labyrinthe laby;
-
+    private ArrayList<Portail> portails = new ArrayList<>(0);
     public JeuPerso(){
         this.personnage = new ArrayList<>(0);
     }
-
+    public JeuPerso(Personnage p) {this.personnage.set(0, p);}
     public void ajouterPerso(Personnage p){
         this.personnage.add(p);
     }
 
 
     public void lireFichier(String fichier) throws IOException {
+        this.personnage = new ArrayList<>(0);
+        this.laby = null;
+        this.portails = new ArrayList<>(0);
         FileReader fr = new FileReader(fichier);
         BufferedReader br = new BufferedReader(fr);
         String ligne = br.readLine();
@@ -53,14 +57,22 @@ public class JeuPerso implements Jeu {
                     case '€':
                         this.personnage.add(new Monstre(x, y, "Monstre " + nbmonstre, 30, 20));
                         nbmonstre++;
+                        break;
+                    case '{':
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau2.txt"));
+                        break;
                     default:
                         this.laby.getMurs()[y][x] = false;
                         break;
                 }
             }
         }
+    }
 
-
+    public void recharger(String nomFichier) throws IOException {
+        Hero h = (Hero) this.getPj();
+        this.lireFichier(nomFichier);
+        this.personnage.addFirst(h);
 
     }
     public int[] getSuivant(int x, int y, Commande c){
@@ -82,36 +94,40 @@ public class JeuPerso implements Jeu {
     }
 
 
-    public boolean deplacementPossible(int x, int y){
-        boolean res = true;
+    public int deplacementPossible(int x, int y){
 
-        if(this.laby.etreMur(x, y)){
-            return false;
-        }
 
-        if(this.etrePersonnage(x, y)){
-            return false;
-        }
+        if(this.laby.etreMur(x, y)) return 0;
 
-        return  res;
+        if(this.etrePersonnage(x, y)) return 1;
+
+        if (this.etrePortail(x, y)) return 2;
+
+        return 10;
     }
 
 
-    public boolean verifsuivant(int x, int y, Commande c){
-        boolean res = false;
+    public int verifsuivant(int x, int y, Commande c){
+
         int[] cooSuivante = this.getSuivant(x, y, c);
-        if (deplacementPossible(cooSuivante[0], cooSuivante[1])){
-            return true;
-        }
-        return res;
+        return deplacementPossible(cooSuivante[0], cooSuivante[1]);
+
     }
 
 
     public void evoluer(Commande c){
-        Personnage p;
-        p = this.personnage.getFirst();
+        Personnage p = this.personnage.getFirst();
 
-        if (verifsuivant(p.getX(), p.getY(), c)) {
+        if (verifsuivant(p.getX(), p.getY(), c) == 2) {
+            try {
+                System.out.println("Bonjour");
+                this.recharger(this.getListePortails().getFirst().getDestination());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (verifsuivant(p.getX(), p.getY(), c) == 10) {
             p.deplacer(c);
         } else {
             deplacerDiagonale(c);
@@ -120,14 +136,13 @@ public class JeuPerso implements Jeu {
         for (int i = 1; i < this.personnage.size(); i++) {
             p = this.personnage.get(i);
             Commande cMonstre = ((Monstre) p).directionAleatoire();
-            if (verifsuivant(p.getX(), p.getY(), cMonstre)) {
+            if (verifsuivant(p.getX(), p.getY(), cMonstre) == 10) {
                 p.deplacer(cMonstre);
             }
         }
     }
 
     public boolean etreFini(){
-
         return false;
     }
 
@@ -137,6 +152,11 @@ public class JeuPerso implements Jeu {
         }
         return null;
     }
+
+    public ArrayList<Portail> getListePortails(){
+        return this.portails;
+    }
+
 
     public ArrayList<Personnage> getListePerso(){
         return this.personnage;
@@ -153,11 +173,23 @@ public class JeuPerso implements Jeu {
     public boolean etrePersonnage(int x, int y){
         boolean perso = false;
         for(Personnage p : this.personnage){
-            if(p.getX() == x && p.getY() == y){
+            if (p.getX() == x && p.getY() == y) {
                 perso = true;
+                break;
             }
         }
         return perso;
+    }
+
+    public boolean etrePortail(int x, int y){
+        boolean port = false;
+        for(Portail p : this.portails){
+            if (p.getX() == x && p.getY() == y) {
+                port = true;
+                break;
+            }
+        }
+        return port;
     }
 
     public void deplacerDiagonale(Commande c){
@@ -174,7 +206,7 @@ public class JeuPerso implements Jeu {
                 cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                 cooSuivanteX = cooSuivante[0];
                 cooSuivanteY = cooSuivante [1];
-                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                     personnage.getFirst().deplacer(c);
                 }else{
                     c.haut = true;
@@ -182,7 +214,7 @@ public class JeuPerso implements Jeu {
                     cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                     cooSuivanteX = cooSuivante[0];
                     cooSuivanteY = cooSuivante[1];
-                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                         personnage.getFirst().deplacer(c);
                     }
                 }
@@ -192,7 +224,7 @@ public class JeuPerso implements Jeu {
                 cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                 cooSuivanteX = cooSuivante[0];
                 cooSuivanteY = cooSuivante [1];
-                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                         personnage.getFirst().deplacer(c);
                 }else{
                     c.bas = true;
@@ -200,7 +232,7 @@ public class JeuPerso implements Jeu {
                     cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                     cooSuivanteX = cooSuivante[0];
                     cooSuivanteY = cooSuivante[1];
-                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                             personnage.getFirst().deplacer(c);
                     }
                 }
@@ -210,7 +242,7 @@ public class JeuPerso implements Jeu {
                 cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                 cooSuivanteX = cooSuivante[0];
                 cooSuivanteY = cooSuivante [1];
-                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                         personnage.getFirst().deplacer(c);
                 }else{
                     c.haut = true;
@@ -218,7 +250,7 @@ public class JeuPerso implements Jeu {
                     cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                     cooSuivanteX = cooSuivante[0];
                     cooSuivanteY = cooSuivante[1];
-                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                             personnage.getFirst().deplacer(c);
                     }
                 }
@@ -228,7 +260,7 @@ public class JeuPerso implements Jeu {
                 cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                 cooSuivanteX = cooSuivante[0];
                 cooSuivanteY = cooSuivante [1];
-                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                         personnage.getFirst().deplacer(c);
                 }else{
                     c.bas = true;
@@ -236,7 +268,7 @@ public class JeuPerso implements Jeu {
                     cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
                     cooSuivanteX = cooSuivante[0];
                     cooSuivanteY = cooSuivante[1];
-                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY) == 10) {
                             personnage.getFirst().deplacer(c);
                     }
                 }

@@ -1,6 +1,9 @@
 package personnage;
 import dessins.Dessins;
 import labyrinthe.DessinLabyrinthe;
+import labyrinthe.DessinPortail;
+import labyrinthe.Portail;
+import moteurJeu.DessinJeu;
 import moteurJeu.MoteurGraphique;
 
 import java.io.IOException;
@@ -12,15 +15,19 @@ public class MainPerso {
 
 
         JeuPerso jeu = new JeuPerso();
-        jeu.lireFichier("src/labyrinthe/niveaux/NiveauEnorme.txt");
+        jeu.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
 
         DessinPerso aff = new DessinPerso(jeu, jeu.getListePerso());
 
         DessinLabyrinthe dessinLabyrinthe = new DessinLabyrinthe(jeu.getLaby());
 
+        DessinPortail dessinPortail = new DessinPortail(jeu, jeu.getListePortails());
         Dessins dess = new Dessins();
-        dess.ajouterDessin(aff);
+
         dess.ajouterDessin(dessinLabyrinthe);
+        dess.ajouterDessin(aff);
+        dess.ajouterDessin(dessinPortail);
+
 
 
         MoteurGraphique moteur = new MoteurGraphique(jeu, dess);

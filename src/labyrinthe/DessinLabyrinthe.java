@@ -14,12 +14,15 @@ public class DessinLabyrinthe implements DessinJeu {
     }
     public void dessiner(BufferedImage image){
         Graphics2D g = (Graphics2D) image.getGraphics();
-        g.setColor(Color.BLACK);
+
         for(int y = 0; y<this.labyrinthe.getMurs().length; y++){
             for(int x = 0; x<this.labyrinthe.getMurs()[y].length; x++){
                 if(this.labyrinthe.etreMur(x,y)){
-                    g.fillRect(x*TAILLE, y*TAILLE, TAILLE, TAILLE);
+                    g.setColor(Color.BLACK);
+                } else {
+                    g.setColor(Color.WHITE);
                 }
+                g.fillRect(x*TAILLE, y*TAILLE, TAILLE, TAILLE);
             }
 
         }

@@ -14,6 +14,7 @@ public class Dessins implements DessinJeu {
 
     @Override
     public void dessiner(BufferedImage image) {
+
         for (DessinJeu elt : this.liste){
             elt.dessiner(image);
         }
