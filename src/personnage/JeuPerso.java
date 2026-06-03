@@ -179,7 +179,11 @@ public class JeuPerso implements Jeu {
 
         if(this.etrePersonnage(x, y)) return 1;
 
-        if (this.etrePortail(x, y)) return 2;
+        if(this.etrePortail(x, y)) return 2;
+
+        if(this.etreItem(x, y)) return 3;
+
+
 
         return 10;
     }
@@ -231,6 +235,15 @@ public class JeuPerso implements Jeu {
                         System.out.println("pv du hero : " + p.getPv());
                         System.out.println("pv du Monstre attaqué : " + pAttaque.getPv());
                     }
+                }
+
+                if(verifsuivant(p.getX(), p.getY(), c) == 3){
+                    int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
+                    Item item = itemSurCetteCase(cooSuivante[0], cooSuivante[1]);
+                    if(item instanceof Epee) item.affecter((Hero) p);
+                    if(item instanceof KitSoins) item.affecter((Hero) p);
+                    if(item instanceof Piege) item.affecter((Hero) p);
+
                 }
             }
             //Si c'est du vide, il s'y déplace librement
@@ -363,6 +376,15 @@ public class JeuPerso implements Jeu {
         return null;
     }
 
+    public Item itemSurCetteCase(int x, int y){
+        for(Item i : this.items){
+            if(i.getX() == x && i.getY() == y){
+                return i;
+            }
+        }
+        return null;
+    }
+
     /**
      * Vérifie si une case aux coordonées x y est un portail ou non
      * @param x coordonnée  de la case
@@ -385,14 +407,13 @@ public class JeuPerso implements Jeu {
      * @param x coordonnée x de la case
      * @param y coordonnée y de la case
      */
-    public void etreItem(int x, int y){
-        boolean isItem = false;
+    public boolean etreItem(int x, int y){
         for(Item i: this.items){
             if(i.getX() == x && i.getY() == y){
-                isItem = true;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     /**

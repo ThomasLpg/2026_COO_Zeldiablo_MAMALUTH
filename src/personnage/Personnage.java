@@ -191,6 +191,7 @@ public abstract class Personnage {
         r.subirDegats(this.degats);
     }
 
+
     /**
      * Permet de dessiner des personnages (des ronds)
      * @param g
