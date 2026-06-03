@@ -23,7 +23,7 @@ public class DessinLabyrinthe implements DessinJeu {
      */
     public void dessiner(BufferedImage image){
         Graphics2D g = (Graphics2D) image.getGraphics();
-
+        this.reset(g, this.labyrinthe.getMurs().length, this.labyrinthe.getMurs()[0].length);
         for(int y = 0; y<this.labyrinthe.getMurs().length; y++){
             for(int x = 0; x<this.labyrinthe.getMurs()[y].length; x++){
                 if(this.labyrinthe.etreMur(x,y)){
@@ -38,5 +38,11 @@ public class DessinLabyrinthe implements DessinJeu {
 
 
         g.dispose();
+    }
+
+    public void reset(Graphics2D g, int x, int y){
+
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, TAILLE*y, TAILLE*x);
     }
 }

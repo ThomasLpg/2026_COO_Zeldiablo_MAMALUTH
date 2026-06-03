@@ -136,7 +136,7 @@ public abstract class Personnage {
         if (p == null) return;
         switch (p.getOrientation()){
             case "haut" :
-                this.y = laby.getMurs().length;
+                this.y = laby.getMurs().length-1;
                 break;
             case "bas" :
                 this.y = 0;
