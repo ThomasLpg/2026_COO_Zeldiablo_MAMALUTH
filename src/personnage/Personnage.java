@@ -87,6 +87,8 @@ public abstract class Personnage {
         this.pv += vie;
     }
 
+    public void addDegats(int degats){ this.degats += degats;}
+
     public String toString(){
         String s = "";
         s += "Nom: " + this.nom + ", pv: " + this.pv;

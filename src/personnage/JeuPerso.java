@@ -1,6 +1,7 @@
 package personnage;
 import Roles.Hero;
 import Roles.Monstre;
+import items.Item;
 import jdk.jshell.execution.JdiExecutionControlProvider;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.Labyrinthe;
@@ -17,6 +18,7 @@ public class JeuPerso implements Jeu {
     private ArrayList<Personnage> personnage;
     private Labyrinthe laby;
     private ArrayList<Portail> portails = new ArrayList<>(0);
+    private ArrayList<Item> items;
 
     /**
      * Constructeur de Personnage, est une arrayList qui augmentera de capacité
@@ -31,9 +33,12 @@ public class JeuPerso implements Jeu {
      * @param p personnage à ajouter
      */
     public JeuPerso(Personnage p) {this.personnage.set(0, p);}
+
     public void ajouterPerso(Personnage p){
         this.personnage.add(p);
     }
+
+    public void ajouterItem(Item i){this.items.add(i);}
 
     /**
      * lis le fichier txt qui définie un niveau, dans lequel se trouve des murs, un heros, des monstres
@@ -202,10 +207,11 @@ public class JeuPerso implements Jeu {
         return this.portails;
     }
 
-
     public ArrayList<Personnage> getListePerso(){
         return this.personnage;
     }
+
+    public ArrayList<Item> getListeItems(){return this.items;}
 
     public Personnage getPj(){
         return this.getPersonnage("Héros");
@@ -235,6 +241,16 @@ public class JeuPerso implements Jeu {
             }
         }
         return port;
+    }
+
+    public void etreItem(int x, int y){
+        boolean isItem = false;
+        for(Item i: this.items){
+            if(i.getX() == x && i.getY() == y){
+                isItem = true;
+                break;
+            }
+        }
     }
 
     public void deplacerDiagonale(Commande c){
