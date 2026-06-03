@@ -1,79 +1,47 @@
 package Roles;
-import labyrinthe.Labyrinthe;
 import moteurJeu.Commande;
 import personnage.Personnage;
 
 public class Monstre extends Personnage {
 
-    public Monstre(int x, int y,String n, int p, int d){
+    public Monstre(int x, int y, String n, int p, int d) {
         super(x, y, n, p, d);
     }
 
-    public void deplacerMonstre(int x, int y, Labyrinthe laby){
-        int deplacement = (int) Math.floor(Math.random() * 8);
+    public Commande directionAleatoire() {
+        int direction = (int) Math.floor(Math.random() * 8);
+        Commande c = new Commande();
 
-        switch (deplacement){
-            case 0 :
-                if (!laby.getMurs()[y-1][x]){
-                    Commande c = new Commande();
-                    c.haut = true;
-                    this.deplacer(c);
-
-                }
+        switch (direction) {
+            case 0:
+                c.haut = true;
                 break;
-            case 1 :
-                if (!laby.getMurs()[y-1][x+1]){
-                    Commande c = new Commande();
-                    c.droite = true;
-                    c.haut = true;
-                    this.deplacer(c);
-                }
+            case 1:
+                c.droite = true;
+                c.haut = true;
                 break;
-            case 2 :
-                if (!laby.getMurs()[y][x+1]){
-                    Commande c = new Commande();
-                    c.droite = true;
-                    this.deplacer(c);
-                }
+            case 2:
+                c.droite = true;
                 break;
-            case 3 :
-                if (!laby.getMurs()[y+1][x+1]){
-                    Commande c = new Commande();
-                    c.droite = true;
-                    c.bas = true;
-                    this.deplacer(c);
-                }
+            case 3:
+                c.droite = true;
+                c.bas = true;
                 break;
-            case 4 :
-                if (!laby.getMurs()[y+1][x]){
-                    Commande c = new Commande();
-                    c.bas = true;
-                    this.deplacer(c);
-                }
+            case 4:
+                c.bas = true;
                 break;
-            case 5 :
-                if (!laby.getMurs()[y+1][x-1]){
-                    Commande c = new Commande();
-                    c.gauche = true;
-                    c.bas = true;
-                    this.deplacer(c);
-                }
+            case 5:
+                c.gauche = true;
+                c.bas = true;
                 break;
-            case 6 :
-                if (!laby.getMurs()[y][x-1]){
-                    Commande c = new Commande();
-                    c.gauche = true;
-                    this.deplacer(c);
-                }
+            case 6:
+                c.gauche = true;
                 break;
-            case 7 :
-                if (!laby.getMurs()[y-1][x-1]){
-                    Commande c = new Commande();
-                    c.haut = true;
-                    c.gauche = true;
-                    this.deplacer(c);
-                }
+            case 7:
+                c.haut = true;
+                c.gauche = true;
                 break;
         }
+        return c;
     }
 }

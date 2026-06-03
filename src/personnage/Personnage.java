@@ -10,7 +10,7 @@ public abstract class Personnage {
     private int y = 0; //Position / coordonnée y
     private String nom = "";
     private int pv = 0 ;
-    private int degats = 0 ;
+    private int degats = 0      ;
 
     public Personnage(int x, int y, String n, int p, int d) {
         this.x = x;
