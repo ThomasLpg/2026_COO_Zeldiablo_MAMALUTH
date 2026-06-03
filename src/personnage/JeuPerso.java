@@ -106,11 +106,10 @@ public class JeuPerso implements Jeu {
             cooSuivante = this.getSuivant(p.getX(), p.getY(), c);
             if (deplacementPossible(cooSuivante[0], cooSuivante[1])){
                 p.deplacer(c);
+            } else {
+                deplacerDiagonale(c);
             }
         }
-        
-
-
     }
 
     public boolean etreFini(){
@@ -144,5 +143,89 @@ public class JeuPerso implements Jeu {
             }
         }
         return perso;
+    }
+
+    public void deplacerDiagonale(Commande c){
+        boolean b = c.bas;
+        boolean h = c.haut;
+        boolean d = c.droite;
+        boolean g = c.gauche;
+        int[] cooSuivante;
+        int cooSuivanteX;
+        int cooSuivanteY;
+        switch("" + d + "-" + g + "-" + h + "-" + b){
+            case"true-false-true-false":
+                c.haut = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                    personnage.getFirst().deplacer(c);
+                }else{
+                    c.haut = true;
+                    c.droite = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                        personnage.getFirst().deplacer(c);
+                    }
+                }
+                break;
+            case "true-false-false-true":
+                c.bas = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                        personnage.getFirst().deplacer(c);
+                }else{
+                    c.bas = true;
+                    c.droite = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                            personnage.getFirst().deplacer(c);
+                    }
+                }
+                break;
+            case "false-true-true-false":
+                c.haut = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                        personnage.getFirst().deplacer(c);
+                }else{
+                    c.haut = true;
+                    c.gauche = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                            personnage.getFirst().deplacer(c);
+                    }
+                }
+                break;
+            case "false-true-false-true":
+                c.bas = false;
+                cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                cooSuivanteX = cooSuivante[0];
+                cooSuivanteY = cooSuivante [1];
+                if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                        personnage.getFirst().deplacer(c);
+                }else{
+                    c.bas = true;
+                    c.gauche = false;
+                    cooSuivante = getSuivant(personnage.getFirst().getX(), personnage.getFirst().getY(), c);
+                    cooSuivanteX = cooSuivante[0];
+                    cooSuivanteY = cooSuivante[1];
+                    if(deplacementPossible(cooSuivanteX, cooSuivanteY)) {
+                            personnage.getFirst().deplacer(c);
+                    }
+                }
+                break;
+        }
     }
 }
