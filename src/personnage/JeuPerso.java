@@ -60,7 +60,10 @@ public class JeuPerso implements Jeu {
                         nbmonstre++;
                         break;
                     case '{':
-                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau2.txt"));
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau2.txt", "droite"));
+                        break;
+                    case '_':
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "haut"));
                         break;
                     default:
                         this.laby.getMurs()[y][x] = false;
@@ -73,6 +76,8 @@ public class JeuPerso implements Jeu {
     public void recharger(String nomFichier) throws IOException {
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
+
+
         DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
         DessinPerso dp = new DessinPerso(this, this.personnage);
         JeuPrincipal.liste_dessins.ajouterDessin(ds);
@@ -125,7 +130,8 @@ public class JeuPerso implements Jeu {
 
         if (verifsuivant(p.getX(), p.getY(), c) == 2) {
             try {
-                System.out.println("Bonjour");
+                int[] cp = this.getSuivant(p.getX(), p.getY(), c);
+                p.prendrePortail(this.getPortail(cp[0], cp[1]), this.laby);
                 this.recharger(this.getListePortails().getFirst().getDestination());
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -160,6 +166,15 @@ public class JeuPerso implements Jeu {
 
     public ArrayList<Portail> getListePortails(){
         return this.portails;
+    }
+
+    public Portail getPortail(int x, int y){
+        for (Portail p : this.portails){
+            if (p.getX() == x && p.getY() == y){
+                return p;
+            }
+        }
+        return null;
     }
 
 

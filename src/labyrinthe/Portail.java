@@ -12,11 +12,13 @@ import static labyrinthe.DessinLabyrinthe.TAILLE;
 public class Portail implements DessinJeu {
     int x, y;
     String niveauDestination;
+    String orientation;
 
-    public Portail(int abs, int ord, String destination){
+    public Portail(int abs, int ord, String destination, String orientation){
         this.x = abs;
         this.y = ord;
         this.niveauDestination = destination;
+        this.orientation = orientation;
     }
 
     @Override
@@ -34,6 +36,10 @@ public class Portail implements DessinJeu {
 
     public int getY() {
         return y;
+    }
+
+    public String getOrientation(){
+        return this.orientation;
     }
 
     public String getDestination() {
