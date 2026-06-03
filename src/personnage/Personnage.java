@@ -112,6 +112,12 @@ public abstract class Personnage {
     public String getNom(){ return this.nom;}
 
     /**
+     * Getter des dégats qu'inflige le personnage
+     * @return
+     */
+    public int getDegats(){return this.degats;}
+
+    /**
      * Retire int coup aux pvs du personnage sur qui la méthode est appliquée
      * @param coup int du nombre de dégats subis
      * @return

@@ -12,7 +12,6 @@
         - critère 2 : Le personnage peut se déplace dans l'axe horizontale, verticale et en diagonal.
       - responsables : Maxime, Thomas, Mattéo, Lucas
 
-- fonctionnalité 2 :
 
 # Bilan
 

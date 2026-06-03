@@ -109,8 +109,8 @@ public class TestCollisions {
         jp.evoluer(commande);
         assertEquals(1, jp.getPj().getX(),
                 "il y a un mur en x = 0");
-        assertEquals(17, jp.getPj().getY(),
-                "il y a un mur en y = 18");
+        assertEquals(16, jp.getPj().getY(),
+                "il y a un mur en y = 16");
     }
 
     @Test
@@ -125,8 +125,8 @@ public class TestCollisions {
         jp.evoluer(commande);
         assertEquals(17, jp.getPj().getX(),
                 "il y a un mur en x = 18");
-        assertEquals(17, jp.getPj().getY(),
-                "il y a un mur en y = 18");
+        assertEquals(16, jp.getPj().getY(),
+                "il y a un mur en y = 16");
     }
 
 

@@ -18,11 +18,11 @@ public class TestLabyrinthe {
     @Test
     public void testConstructeurDimensions(){
         // Initialisation d'un labyrinthe de 20 par 20
-        Labyrinthe labyrinthe = new Labyrinthe(20, 15);
+        Labyrinthe labyrinthe = new Labyrinthe(20, 20);
 
         // Vérification des dimensions
         assertEquals(20, labyrinthe.getMurs().length);
-        assertEquals(15, labyrinthe.getMurs()[0].length);
+        assertEquals(20, labyrinthe.getMurs()[0].length);
 
 
     }

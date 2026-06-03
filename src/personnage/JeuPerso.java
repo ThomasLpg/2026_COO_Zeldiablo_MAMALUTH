@@ -1,10 +1,7 @@
 package personnage;
 import Roles.Hero;
 import Roles.Monstre;
-import items.Epee;
-import items.Item;
-import items.KitSoins;
-import items.Piege;
+import items.*;
 import jdk.jshell.execution.JdiExecutionControlProvider;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.Labyrinthe;
@@ -145,8 +142,10 @@ public class JeuPerso implements Jeu {
         this.lireFichier(nomFichier);
         DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
         DessinPerso dp = new DessinPerso(this, this.personnage);
+        DessinItem di = new DessinItem(this, this.items);
         JeuPrincipal.liste_dessins.ajouterDessin(ds);
         JeuPrincipal.liste_dessins.ajouterDessin(dp);
+        JeuPrincipal.liste_dessins.ajouterDessin(di);
         this.personnage.addFirst(h);
 
     }
@@ -254,7 +253,7 @@ public class JeuPerso implements Jeu {
                     if(item instanceof Epee) item.affecter((Hero) p);
                     if(item instanceof KitSoins) item.affecter((Hero) p);
                     if(item instanceof Piege) item.affecter((Hero) p);
-
+                    this.items.remove(item);
                 }
             }
             //Si c'est du vide, il s'y déplace librement
@@ -295,7 +294,7 @@ public class JeuPerso implements Jeu {
      * @return
      */
     public boolean etreFini(){
-        return false;
+        return (this.personnage.getFirst().getPv() == 0);
     }
 
     /**
