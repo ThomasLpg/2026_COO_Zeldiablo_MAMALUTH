@@ -83,6 +83,11 @@ public class JeuPerso implements Jeu {
         }
     }
 
+    /**
+     * Permet de créer un nouveau niveau lorsque le heros prend un portail
+     * @param nomFichier fichier du nouveau niveau
+     * @throws IOException
+     */
     public void recharger(String nomFichier) throws IOException {
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
@@ -201,10 +206,19 @@ public class JeuPerso implements Jeu {
         }
     }
 
+    /**
+     * Arrête le jeu lorsque condition atteinte
+     * @return
+     */
     public boolean etreFini(){
         return false;
     }
 
+    /**
+     * Getter d'un personnage par rapport à son nom
+     * @param nom du personnage
+     * @return le personnage
+     */
     public Personnage getPersonnage(String nom){
         for (Personnage p : this.personnage){
             if (p.getNom().equals(nom)) return p;
@@ -212,23 +226,45 @@ public class JeuPerso implements Jeu {
         return null;
     }
 
+    /**
+     * Getter de la liste des portails
+     * @return liste de portail
+     */
     public ArrayList<Portail> getListePortails(){
         return this.portails;
     }
 
 
+    /**
+     * Getter de la liste des personnages
+     * @return liste de personnage
+     */
     public ArrayList<Personnage> getListePerso(){
         return this.personnage;
     }
 
+    /**
+     * Getter des personnages Heros
+     * @return personnage avec le nom Héros
+     */
     public Personnage getPj(){
         return this.getPersonnage("Héros");
     }
 
+    /**
+     * Getter du labyrinthe
+     * @return le labyrinthe (niveau)
+     */
     public Labyrinthe getLaby(){
         return this.laby;
     }
 
+    /**
+     * Vérifie si une case aux coordonnées x y est un personnage ou non
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     * @return boolean true si la case est un personnage, false sinon
+     */
     public boolean etrePersonnage(int x, int y){
         boolean perso = false;
         for(Personnage p : this.personnage){
@@ -251,6 +287,12 @@ public class JeuPerso implements Jeu {
         return null;
     }
 
+    /**
+     * Vérifie si une case aux coordonées x y est un portail ou non
+     * @param x coordonnée  de la case
+     * @param y coordonnée y de la case
+     * @return boolean true si la case est un portail, false sinon
+     */
     public boolean etrePortail(int x, int y){
         boolean port = false;
         for(Portail p : this.portails){
@@ -262,6 +304,11 @@ public class JeuPerso implements Jeu {
         return port;
     }
 
+    /**
+     * Permet aux Personnages de se déplacer en diagonale, permet aussi lorsque que le heros est contre un mur,
+     * si il continue d'aller vers ce mur et va dans une autre direction, d'aller dans cette autre direction
+     * @param c
+     */
     public void deplacerDiagonale(Commande c){
         boolean b = c.bas;
         boolean h = c.haut;
