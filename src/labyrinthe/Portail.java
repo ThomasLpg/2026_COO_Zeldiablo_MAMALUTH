@@ -1,11 +1,11 @@
 package labyrinthe;
 import moteurJeu.DessinJeu;
-import personnage.JeuPerso;
+
 
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+
 
 import static labyrinthe.DessinLabyrinthe.TAILLE;
 

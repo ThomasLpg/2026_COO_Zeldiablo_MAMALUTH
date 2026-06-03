@@ -32,8 +32,10 @@ public class MainPerso {
 
         MoteurGraphique moteur = new MoteurGraphique(jeu, dess);
 
+        JeuPrincipal main = new JeuPrincipal(jeu, dess, moteur);
+
         // lance la boucle de jeu qui tourne jusque la fin du jeu
-        moteur.lancerJeu(400, 400);
+        main.lancerJeu(400, 400);
 
         // lorsque le jeu est fini
         System.out.println("FIN");
