@@ -98,18 +98,35 @@ public class JeuPerso implements Jeu {
     }
 
 
+    public boolean verifsuivant(int x, int y, Commande c){
+        boolean res = false;
+        int[] cooSuivante = this.getSuivant(x, y, c);
+        if (deplacementPossible(cooSuivante[0], cooSuivante[1])){
+            return true;
+        }
+        return res;
+    }
 
 
     public void evoluer(Commande c){
         int[] cooSuivante;
-        for (Personnage p : this.personnage){
-            cooSuivante = this.getSuivant(p.getX(), p.getY(), c);
-            if (deplacementPossible(cooSuivante[0], cooSuivante[1])){
-                p.deplacer(c);
-            } else {
-                deplacerDiagonale(c);
+        Personnage p;
+        p = this.personnage.getFirst();
+
+        if (verifsuivant(p.getX(), p.getY(), c)) {
+            p.deplacer(c);
+        }
+
+        for (int i = 1; i < this.personnage.size(); i++) {
+            p = this.personnage.get(i);
+            Commande cMonstre = ((Monstre) p).directionAleatoire();
+            if (verifsuivant(p.getX(), p.getY(), cMonstre)) {
+                p.deplacer(cMonstre);
             }
         }
+        
+
+
     }
 
     public boolean etreFini(){
