@@ -10,8 +10,9 @@ public class MainPerso {
     public static void main(String[] args) throws InterruptedException, IOException {
 
 
+
         JeuPerso jeu = new JeuPerso();
-        jeu.lireFichier("src/labyrinthe/niveaux/NiveauTestBeaucoup.txt");
+        jeu.lireFichier("src/labyrinthe/niveaux/NiveauEnorme.txt");
 
         DessinPerso aff = new DessinPerso(jeu, jeu.getListePerso());
 
