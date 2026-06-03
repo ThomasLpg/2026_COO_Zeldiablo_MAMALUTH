@@ -74,6 +74,8 @@ public abstract class Personnage {
         return this.y;
     }
 
+    public int getPv(){ return this.pv;}
+
     public String getNom(){ return this.nom;}
 
     public int subirDegats(int coup){
