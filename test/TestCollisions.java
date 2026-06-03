@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCollisions {
     @Test
-    public void testCollisionMurBas() throws IOException {
+    public void testCollisionMurBas() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurBas.txt");
 
@@ -27,7 +27,7 @@ public class TestCollisions {
     }
 
     @Test
-    public void testCollisionMurHaut() throws IOException {
+    public void testCollisionMurHaut() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurHaut.txt");
 
@@ -40,7 +40,7 @@ public class TestCollisions {
     }
 
     @Test
-    public void testCollisionMurDroite() throws IOException {
+    public void testCollisionMurDroite() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurDroit.txt");
 
@@ -53,7 +53,7 @@ public class TestCollisions {
     }
 
     @Test
-    public void testCollisionMurGauche() throws IOException {
+    public void testCollisionMurGauche() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurGauche.txt");
 
@@ -66,7 +66,7 @@ public class TestCollisions {
     }
 
     @Test
-    public void testCollisionMurHautGauhe() throws IOException {
+    public void testCollisionMurHautGauhe() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurHautGauche.txt");
 
@@ -82,7 +82,7 @@ public class TestCollisions {
     }
 
     @Test
-    public void testCollisionMurHautDroite() throws IOException {
+    public void testCollisionMurHautDroite() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurHautDroite.txt");
 
@@ -98,7 +98,7 @@ public class TestCollisions {
     }
 
     @Test
-    public void testCollisionMurBasGauhe() throws IOException {
+    public void testCollisionMurBasGauhe() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurBasGauche.txt");
 
@@ -114,7 +114,7 @@ public class TestCollisions {
     }
 
     @Test
-    public void testCollisionMurBasDroite() throws IOException {
+    public void testCollisionMurBasDroite() throws IOException, InterruptedException {
         JeuPerso jp = new JeuPerso();
         jp.lireFichier("src/labyrinthe/niveaux/testMurBasDroite.txt");
 

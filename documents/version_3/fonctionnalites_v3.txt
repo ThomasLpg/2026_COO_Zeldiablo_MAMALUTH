@@ -1,19 +1,17 @@
 # Fonctionnalités prévues version 3
 
-- fonctionnalité 1 : Gestion des niveaux
-  - descriptif texte : Pouvoir créer des niveaux à partir d'un fichier texte et
-  de les chargers
+- fonctionnalité 1 : Collisions entre les personnages
+  - descriptif texte : Gestions des collisions entre les personnages
   - critères de validation :
-    - critère 1 : Les murs, roles chargent aux endroits prévus
-    - critère 2 : Choisir le niveau au démmarage (paramètre main)
-  - responsables :
+    - critère 1 : Les personnages vérifients qu'il n'y ait pas d'autre
+    personnage sur la case suivante avant de se déplacer et ne se traversent pas
+  - responsables : Thomas, Maxime, Lucas, Matteo
 
-- fonctionnalité 2 : Cases déclancheur
-  - descriptif texte : Lorsque une entité arrive sur certaines cases,
-  ces cases déclenchent un effet
+
+
+- fonctionnalité 1 : Le monstre se déplace plus doucement
+  - descriptif texte :
   - critères de validation :
-    - critère 1 : Les cases a effet sont traversable
-    - critère 2 : Lorsqu'un personnage (héros ou monstre)
-     marche sur cette case, elle déclenche immédiatement un effet
-    - critère 3 : L'effet est pour le moment un affichage dans la console
+    - critère 1
+    - critère 2
   - responsables :

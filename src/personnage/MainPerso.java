@@ -11,7 +11,7 @@ public class MainPerso {
 
 
         JeuPerso jeu = new JeuPerso();
-        jeu.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
+        jeu.lireFichier("src/labyrinthe/niveaux/NiveauTestBeaucoup.txt");
 
         DessinPerso aff = new DessinPerso(jeu, jeu.getListePerso());
 

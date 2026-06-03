@@ -49,7 +49,7 @@ public class JeuPerso implements Jeu {
                         this.laby.getMurs()[i][y] = true;
                         break;
                     case '&':
-                        this.personnage.add(new Hero(i, y, "Héros", 100, 10));
+                        this.personnage.addFirst(new Hero(i, y, "Héros", 100, 10));
                         break;
                     case '€':
                         this.personnage.add(new Monstre(i, y, "Monstre " + nbmonstre, 30, 20));
@@ -109,7 +109,6 @@ public class JeuPerso implements Jeu {
 
 
     public void evoluer(Commande c){
-        int[] cooSuivante;
         Personnage p;
         p = this.personnage.getFirst();
 
@@ -126,13 +125,11 @@ public class JeuPerso implements Jeu {
                 p.deplacer(cMonstre);
             }
         }
-        
-
-
     }
 
     public boolean etreFini(){
-        return this.laby.etreMur(personnage.getFirst().getY(), personnage.getFirst().getX());
+
+        return false;
     }
 
     public Personnage getPersonnage(String nom){

@@ -64,7 +64,7 @@ public class TestJeuPerso {
     }
 
     @Test
-    public void testEvoluerHaut(){
+    public void testEvoluerHaut() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
@@ -83,7 +83,7 @@ public class TestJeuPerso {
     }
 
     @Test
-    public void testEvoluerHautDroite(){
+    public void testEvoluerHautDroite() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
@@ -103,7 +103,7 @@ public class TestJeuPerso {
     }
 
     @Test
-    public void testEvoluerDroite(){
+    public void testEvoluerDroite() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
@@ -123,7 +123,7 @@ public class TestJeuPerso {
 
 
     @Test
-    public void testEvoluerBasDroite(){
+    public void testEvoluerBasDroite() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
@@ -144,7 +144,7 @@ public class TestJeuPerso {
 
 
     @Test
-    public void testEvoluerBas(){
+    public void testEvoluerBas() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
@@ -163,7 +163,7 @@ public class TestJeuPerso {
     }
 
     @Test
-    public void testEvoluerBasGauche(){
+    public void testEvoluerBasGauche() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
@@ -183,7 +183,7 @@ public class TestJeuPerso {
     }
 
     @Test
-    public void testEvoluerGauche(){
+    public void testEvoluerGauche() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
@@ -202,7 +202,7 @@ public class TestJeuPerso {
     }
 
     @Test
-    public void testEvoluerHautGauche(){
+    public void testEvoluerHautGauche() throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {

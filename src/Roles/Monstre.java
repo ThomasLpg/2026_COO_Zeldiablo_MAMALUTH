@@ -9,7 +9,7 @@ public class Monstre extends Personnage {
     }
 
     public Commande directionAleatoire() {
-        int direction = (int) Math.floor(Math.random() * 8);
+        int direction = (int) Math.floor(Math.random() * 32);
         Commande c = new Commande();
 
         switch (direction) {
