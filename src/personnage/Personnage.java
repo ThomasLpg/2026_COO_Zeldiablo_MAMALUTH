@@ -26,7 +26,11 @@ public abstract class Personnage {
         this.x = x;
         this.y = y;
         this.nom = n;
-        this.pv = p;
+        if(p < 0){
+            this.pv = 0;
+        }else {
+            this.pv = p;
+        }
         this.degats = d;
     }
 
@@ -113,7 +117,12 @@ public abstract class Personnage {
      * @return
      */
     public int subirDegats(int coup){
-        this.pv -= coup;
+        if(this.pv -coup < 0){
+            this.pv = 0;
+
+        }else{
+            this.pv -= coup;
+        }
         return coup;
     }
 

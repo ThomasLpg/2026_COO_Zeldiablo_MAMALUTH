@@ -73,10 +73,10 @@ public class JeuPerso implements Jeu {
                         this.laby.getMurs()[y][x] = true;
                         break;
                     case '&':
-                        this.personnage.addFirst(new Hero(x, y, "Héros", 100, 10));
+                        this.personnage.addFirst(new Hero(x, y, "Héros", 100, 5));
                         break;
                     case '€':
-                        this.personnage.add(new Monstre(x, y, "Monstre " + nbmonstre, 30, 20));
+                        this.personnage.add(new Monstre(x, y, "Monstre " + nbmonstre, 50, 30));
                         nbmonstre++;
                         break;
                     case '{':
@@ -186,53 +186,60 @@ public class JeuPerso implements Jeu {
      */
     public void evoluer(Commande c){
         Personnage p = this.personnage.getFirst();
-        if (c.bas || c.haut || c.gauche || c.droite){
-            //Si c'est un portail, le jeu est rechargé vers le niveau voulu
-            if (verifsuivant(p.getX(), p.getY(), c) == 2) {
-                try {
-                    int[] cp = this.getSuivant(p.getX(), p.getY(), c);
-                    p.prendrePortail(this.getPortail(cp[0], cp[1]), this.laby);
-                    this.recharger(this.getListePortails().getFirst().getDestination());
+        if(!p.etreMort()){
+            if (c.bas || c.haut || c.gauche || c.droite){
+                //Si c'est un portail, le jeu est rechargé vers le niveau voulu
+                if (verifsuivant(p.getX(), p.getY(), c) == 2) {
+                    try {
+                        int[] cp = this.getSuivant(p.getX(), p.getY(), c);
+                        p.prendrePortail(this.getPortail(cp[0], cp[1]), this.laby);
+                        this.recharger(this.getListePortails().getFirst().getDestination());
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                //Si c'est un personnage, il attaque le personnage en lui infligeant son
+                //nombre de dégats en attribut
+                if(verifsuivant(p.getX(), p.getY(), c) == 1){
+                    int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
+                    Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
+                    if(pAttaque instanceof Monstre){
+                        p.attaquer(pAttaque);
+                        System.out.println("pv du hero : " + p.getPv());
+                        System.out.println("pv du Monstre attaqué : " + pAttaque.getPv());
+                    }
                 }
             }
-
-            //Si c'est un personnage, il attaque le personnage en lui infligeant son
-            //nombre de dégats en attribut
-            if(verifsuivant(p.getX(), p.getY(), c) == 1){
-                int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
-                Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
-                p.attaquer(pAttaque);
-                System.out.println("pv du hero : " + p.getPv());
-                System.out.println("pv du Monstre attaqué : " + pAttaque.getPv());
+            //Si c'est du vide, il s'y déplace librement
+            if (verifsuivant(p.getX(), p.getY(), c) == 10) {
+                p.deplacer(c);
+            } else {
+                deplacerDiagonale(c);
             }
         }
-
-
-
-
-        //Si c'est du vide, il s'y déplace librement
-        if (verifsuivant(p.getX(), p.getY(), c) == 10) {
-            p.deplacer(c);
-        } else {
-            deplacerDiagonale(c);
-        }
-
 
         for (int i = 1; i < this.personnage.size(); i++) {
             p = this.personnage.get(i);
-            Commande cMonstre = ((Monstre) p).directionAleatoire();
-            if (cMonstre.bas || cMonstre.haut || cMonstre.gauche || cMonstre.droite) {
-                if (verifsuivant(p.getX(), p.getY(), cMonstre) == 1) {
-                    int cooSuivante[] = getSuivant(p.getX(), p.getY(), cMonstre);
-                    Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
-                    p.attaquer(pAttaque);
+            if(!p.etreMort()){
+                Commande cMonstre = ((Monstre) p).directionAleatoire();
+                if (cMonstre.bas || cMonstre.haut || cMonstre.gauche || cMonstre.droite) {
+                    if (verifsuivant(p.getX(), p.getY(), cMonstre) == 1) {
+                        int cooSuivante[] = getSuivant(p.getX(), p.getY(), cMonstre);
+                        Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
+                        if(pAttaque instanceof Hero){
+                            p.attaquer(pAttaque);
+                            System.out.println("pv du Monstre qui attaque : " + p.getPv());
+                            System.out.println("pv du Hero : " + pAttaque.getPv());
+                        }
+                    }
+                    if (verifsuivant(p.getX(), p.getY(), cMonstre) == 10) {
+                        p.deplacer(cMonstre);
+                    }
                 }
-                if (verifsuivant(p.getX(), p.getY(), cMonstre) == 10) {
-                    p.deplacer(cMonstre);
-                }
+            }else if(p.etreMort()){
+                this.personnage.remove(p);
             }
         }
     }
