@@ -9,6 +9,8 @@ import moteurJeu.MoteurGraphique;
 
 import java.io.IOException;
 
+import static labyrinthe.DessinLabyrinthe.TAILLE;
+
 
 public class MainPerso {
     /**
@@ -22,6 +24,10 @@ public class MainPerso {
 
         JeuPerso jeu = new JeuPerso();
         jeu.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
+
+        int hauteur = jeu.getLaby().getMurs().length;
+        int largeur = jeu.getLaby().getMurs()[0].length;
+
 
         DessinPerso aff = new DessinPerso(jeu, jeu.getListePerso());
 
@@ -44,7 +50,7 @@ public class MainPerso {
         JeuPrincipal main = new JeuPrincipal(jeu, dess, moteur);
 
         // lance la boucle de jeu qui tourne jusque la fin du jeu
-        main.lancerJeu(400, 400);
+        main.lancerJeu((largeur * TAILLE)-1, (hauteur*TAILLE)-1);
 
         // lorsque le jeu est fini
         System.out.println("FIN");

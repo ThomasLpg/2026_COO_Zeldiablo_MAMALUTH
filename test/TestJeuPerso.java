@@ -202,7 +202,7 @@ public class TestJeuPerso {
     }
 
     @Test
-    public void testEvoluerHautGauche() throws InterruptedException {
+    public void testEvoluerHautGauche()  throws InterruptedException {
         JeuPerso jp = new JeuPerso();
 
         try {
