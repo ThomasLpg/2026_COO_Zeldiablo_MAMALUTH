@@ -258,7 +258,7 @@ public class JeuPerso implements Jeu {
                 }
             }
             //Si c'est du vide, il s'y déplace librement
-            if (verifsuivant(p.getX(), p.getY(), c) == 10) {
+            if (verifsuivant(p.getX(), p.getY(), c) == 10 || verifsuivant(p.getX(), p.getY(), c) == 3) {
                 p.deplacer(c);
             } else {
                 deplacerDiagonale(c);
