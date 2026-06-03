@@ -23,7 +23,7 @@ public class JeuPerso implements Jeu {
     private ArrayList<Portail> portails = new ArrayList<>(0);
     private ArrayList<Item> items = new ArrayList<>(0);
     static int niveau = 2;
-
+    private ArrayList<Labyrinthe> labyrinthes = new ArrayList<>(0);
     /**
      * Constructeur de Personnage, est une arrayList qui augmentera de capacité
      * à chaque Personnage ajouté
@@ -52,6 +52,12 @@ public class JeuPerso implements Jeu {
      */
     public void ajouterItem(Item i){this.items.add(i);}
 
+    public void lireNiveaux(int nbNiveau) throws IOException {
+        for (int i = 2 ; i <= nbNiveau ; i++){
+            this.lireFichier("src/labyrinthe/niveaux/Niveau" + i + ".txt");
+        }
+        this.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
+    }
     /**
      * lis le fichier txt qui définie un niveau, dans lequel se trouve des murs, un heros, des monstres
      * @param fichier txt à lire
@@ -59,8 +65,9 @@ public class JeuPerso implements Jeu {
      */
     public void lireFichier(String fichier) throws IOException {
         this.personnage = new ArrayList<>(0);
-        this.laby = null;
         this.portails = new ArrayList<>(0);
+        this.items = new ArrayList<>(0);
+
         FileReader fr = new FileReader(fichier);
         BufferedReader br = new BufferedReader(fr);
         String ligne = br.readLine();
@@ -76,8 +83,11 @@ public class JeuPerso implements Jeu {
         }
         br.close();
         this.laby = new Labyrinthe(longmax, liste_lignes.size());
+        System.out.println(longmax + " " + liste_lignes.size());
         for (int y = 0 ; y < liste_lignes.size() ; y++){
+
             for (int x = 0; x < liste_lignes.get(y).length() ; x++) {
+
                 c = liste_lignes.get(y).charAt(x);
                 switch (c) {
                     case '#':
@@ -121,6 +131,7 @@ public class JeuPerso implements Jeu {
                 }
             }
         }
+        this.labyrinthes.add(laby);
     }
 
     /**
@@ -132,8 +143,6 @@ public class JeuPerso implements Jeu {
         niveau++;
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
-
-
         DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
         DessinPerso dp = new DessinPerso(this, this.personnage);
         JeuPrincipal.liste_dessins.ajouterDessin(ds);
@@ -213,12 +222,14 @@ public class JeuPerso implements Jeu {
         Personnage p = this.personnage.getFirst();
         if(!p.etreMort()){
             if (c.bas || c.haut || c.gauche || c.droite){
-                //Si c'est un portail, le jeu est rechargé vers le niveau voulu
+                //Si c'est un portail, le jeu est rechargé vers le niveau voulu (niveau suivant)
                 if (verifsuivant(p.getX(), p.getY(), c) == 2) {
                     try {
+
                         int[] cp = this.getSuivant(p.getX(), p.getY(), c);
                         p.prendrePortail(this.getPortail(cp[0], cp[1]), this.laby);
                         this.recharger(this.getListePortails().getFirst().getDestination());
+
 
                     } catch (IOException e) {
                         throw new RuntimeException(e);
