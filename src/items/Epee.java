@@ -12,7 +12,7 @@ public class Epee extends Item{
     }
 
     public void affecter(Hero h){
-        h.addDegats(this.degats);
+       h.addDegats(this.degats);
     }
 
     public int getDegats(){return this.degats;}

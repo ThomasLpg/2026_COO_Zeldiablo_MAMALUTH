@@ -177,6 +177,7 @@ public class JeuPerso implements Jeu {
                 int[] cp = this.getSuivant(p.getX(), p.getY(), c);
                 p.prendrePortail(this.getPortail(cp[0], cp[1]), this.laby);
                 this.recharger(this.getListePortails().getFirst().getDestination());
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
