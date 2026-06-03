@@ -1,0 +1,33 @@
+# Fonctionnalités prévues version 4
+
+- fonctionnalité 1 : Des portails
+  - descriptif texte : portails qui relient 2 niveaux (précédents suivant)
+  - critères de validation :
+    - critère 1 : Les portails sont accessibles que quand tout les monstres sont mort
+  - responsables : Maxime
+
+- fonctionnalité 2 : Attaque entre Personnage différents
+  - descriptif texte : Les personnages peuvent s'attaquer entre eux, perdre des pvs et
+  mourrir.
+    - critère 1 : Le personnage perd des points de vie quand il se fait attaquer
+    - critère 2 :il fait perdre des pvs aux personnages qu'il attaque
+    (différent de son type)
+  - responsables : Thomas
+
+- fonctionnalité 3 : Items
+  - descriptif texte : Gestions de différents items, armes, soins, piege
+  - critères de validation :
+    - critère 1 : l'arme est contenu dans l'inventaire du personnage
+    - critère 2 : Il ne peut avoir qu'une arme, certains items sont consommé directement
+  - responsables : Lucas
+
+  - fonctionnalité 4 :
+    - descriptif texte : Ajout des stripes au jeu
+    - critères de validation : chaque items et personnages ont des stripes différents
+    - responsables : Matteo
+
+
+
+# Bilan
+
+- Quelles fonctionnalités est validée ?

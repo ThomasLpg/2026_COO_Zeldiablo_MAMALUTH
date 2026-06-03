@@ -1,4 +1,6 @@
 package personnage;
+import labyrinthe.Labyrinthe;
+import labyrinthe.Portail;
 import moteurJeu.Commande;
 import java.awt.*;
 
@@ -72,6 +74,8 @@ public abstract class Personnage {
         return this.y;
     }
 
+    public int getPv(){ return this.pv;}
+
     public String getNom(){ return this.nom;}
 
     public int subirDegats(int coup){
@@ -79,6 +83,24 @@ public abstract class Personnage {
         return coup;
     }
 
+    public void prendrePortail(Portail p, Labyrinthe laby){
+        if (p == null) return;
+        switch (p.getOrientation()){
+            case "haut" :
+                this.y = laby.getMurs().length;
+                break;
+            case "bas" :
+                this.y = 0;
+                break;
+            case "gauche":
+                this.x = laby.getMurs()[0].length;
+                break;
+            case "droite" :
+                this.x = 0;
+                break;
+        }
+
+    }
     public boolean etreMort(){
         return(this.pv == 0);
     }
