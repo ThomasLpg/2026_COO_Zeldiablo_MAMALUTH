@@ -115,6 +115,8 @@ public class JeuPerso implements Jeu {
 
         if (verifsuivant(p.getX(), p.getY(), c)) {
             p.deplacer(c);
+        } else {
+            deplacerDiagonale(c);
         }
 
         for (int i = 1; i < this.personnage.size(); i++) {
