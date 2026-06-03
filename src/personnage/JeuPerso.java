@@ -39,23 +39,22 @@ public class JeuPerso implements Jeu {
             ligne = br.readLine();
         }
         br.close();
-        this.laby = new Labyrinthe(liste_lignes.size(), longmax);
-
+        this.laby = new Labyrinthe(longmax, liste_lignes.size());
         for (int y = 0 ; y < liste_lignes.size() ; y++){
-            for (int i = 0; i < liste_lignes.get(y).length() ; i++) {
-                c = liste_lignes.get(y).charAt(i);
+            for (int x = 0; x < liste_lignes.get(y).length() ; x++) {
+                c = liste_lignes.get(y).charAt(x);
                 switch (c) {
                     case '#':
-                        this.laby.getMurs()[i][y] = true;
+                        this.laby.getMurs()[y][x] = true;
                         break;
                     case '&':
-                        this.personnage.addFirst(new Hero(i, y, "Héros", 100, 10));
+                        this.personnage.addFirst(new Hero(x, y, "Héros", 100, 10));
                         break;
                     case '€':
-                        this.personnage.add(new Monstre(i, y, "Monstre " + nbmonstre, 30, 20));
+                        this.personnage.add(new Monstre(x, y, "Monstre " + nbmonstre, 30, 20));
                         nbmonstre++;
                     default:
-                        this.laby.getMurs()[i][y] = false;
+                        this.laby.getMurs()[y][x] = false;
                         break;
                 }
             }
