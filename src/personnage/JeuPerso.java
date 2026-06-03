@@ -17,15 +17,29 @@ public class JeuPerso implements Jeu {
     private ArrayList<Personnage> personnage;
     private Labyrinthe laby;
     private ArrayList<Portail> portails = new ArrayList<>(0);
+
+    /**
+     * Constructeur de Personnage, est une arrayList qui augmentera de capacité
+     * à chaque Personnage ajouté
+     */
     public JeuPerso(){
         this.personnage = new ArrayList<>(0);
     }
+
+    /**
+     * Ajoute un nouveau personnage à la liste de Personnage
+     * @param p personnage à ajouter
+     */
     public JeuPerso(Personnage p) {this.personnage.set(0, p);}
     public void ajouterPerso(Personnage p){
         this.personnage.add(p);
     }
 
-
+    /**
+     * lis le fichier txt qui définie un niveau, dans lequel se trouve des murs, un heros, des monstres
+     * @param fichier txt à lire
+     * @throws IOException
+     */
     public void lireFichier(String fichier) throws IOException {
         this.personnage = new ArrayList<>(0);
         this.laby = null;
@@ -73,6 +87,11 @@ public class JeuPerso implements Jeu {
         }
     }
 
+    /**
+     * Permet de créer un nouveau niveau lorsque le heros prend un portail
+     * @param nomFichier fichier du nouveau niveau
+     * @throws IOException
+     */
     public void recharger(String nomFichier) throws IOException {
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
@@ -85,6 +104,16 @@ public class JeuPerso implements Jeu {
         this.personnage.addFirst(h);
 
     }
+
+    /**
+     * Permet d'obtenir la case suivante, en prenant une commande, on sait dans quelle direction le personnage
+     * veut se déplacer, on prend la case dans cette direction
+     *
+     * @param x coordonnée x du personnage
+     * @param y coordonnée y du personnage
+     * @param c direction dans laquelle le personnage veut aller
+     * @return un tableau des coordonnées de la case suivante par rapport à la commande
+     */
     public int[] getSuivant(int x, int y, Commande c){
 
         if(c.bas){
@@ -103,7 +132,12 @@ public class JeuPerso implements Jeu {
         return res;
     }
 
-
+    /**
+     * Regarde ce qui se trouve dans la case en x y
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     * @return true si la case est vide, false si il quelque chose est dedans
+     */
     public int deplacementPossible(int x, int y){
 
 
@@ -116,7 +150,15 @@ public class JeuPerso implements Jeu {
         return 10;
     }
 
-
+    /**
+     * Vérifie si on peut se déplacer dans la case suivante, utilise la méthode getSuivant pour
+     * obtenir les coordonnées de la case suivante, et deplacementPossible pour savoir ce qui se
+     * trouve dans cette case
+     * @param x coordonnée x de la case suivante
+     * @param y coordonnée y de la case suivante
+     * @param c Commande pour savoir dans quelle direction est la case suivante
+     * @return boolean True si le deplacement dans la case suivante est possible, false sinon
+     */
     public int verifsuivant(int x, int y, Commande c){
 
         int[] cooSuivante = this.getSuivant(x, y, c);
@@ -124,7 +166,10 @@ public class JeuPerso implements Jeu {
 
     }
 
-
+    /**
+     * Permet de déplacer le personnage (heros ou monstre), si verifSuivant
+     * @param c commande utilisateur
+     */
     public void evoluer(Commande c){
         Personnage p = this.personnage.getFirst();
 
@@ -153,10 +198,19 @@ public class JeuPerso implements Jeu {
         }
     }
 
+    /**
+     * Arrête le jeu lorsque condition atteinte
+     * @return
+     */
     public boolean etreFini(){
         return false;
     }
 
+    /**
+     * Getter d'un personnage par rapport à son nom
+     * @param nom du personnage
+     * @return le personnage
+     */
     public Personnage getPersonnage(String nom){
         for (Personnage p : this.personnage){
             if (p.getNom().equals(nom)) return p;
@@ -164,6 +218,10 @@ public class JeuPerso implements Jeu {
         return null;
     }
 
+    /**
+     * Getter de la liste des portails
+     * @return liste de portail
+     */
     public ArrayList<Portail> getListePortails(){
         return this.portails;
     }
@@ -178,18 +236,36 @@ public class JeuPerso implements Jeu {
     }
 
 
+    /**
+     * Getter de la liste des personnages
+     * @return liste de personnage
+     */
     public ArrayList<Personnage> getListePerso(){
         return this.personnage;
     }
 
+    /**
+     * Getter des personnages Heros
+     * @return personnage avec le nom Héros
+     */
     public Personnage getPj(){
         return this.getPersonnage("Héros");
     }
 
+    /**
+     * Getter du labyrinthe
+     * @return le labyrinthe (niveau)
+     */
     public Labyrinthe getLaby(){
         return this.laby;
     }
 
+    /**
+     * Vérifie si une case aux coordonnées x y est un personnage ou non
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     * @return boolean true si la case est un personnage, false sinon
+     */
     public boolean etrePersonnage(int x, int y){
         boolean perso = false;
         for(Personnage p : this.personnage){
@@ -201,6 +277,12 @@ public class JeuPerso implements Jeu {
         return perso;
     }
 
+    /**
+     * Vérifie si une case aux coordonées x y est un portail ou non
+     * @param x coordonnée  de la case
+     * @param y coordonnée y de la case
+     * @return boolean true si la case est un portail, false sinon
+     */
     public boolean etrePortail(int x, int y){
         boolean port = false;
         for(Portail p : this.portails){
@@ -212,6 +294,11 @@ public class JeuPerso implements Jeu {
         return port;
     }
 
+    /**
+     * Permet aux Personnages de se déplacer en diagonale, permet aussi lorsque que le heros est contre un mur,
+     * si il continue d'aller vers ce mur et va dans une autre direction, d'aller dans cette autre direction
+     * @param c
+     */
     public void deplacerDiagonale(Commande c){
         boolean b = c.bas;
         boolean h = c.haut;
