@@ -75,9 +75,13 @@ public class JeuPerso implements Jeu {
             ligne = br.readLine();
         }
         br.close();
-        this.laby = new Labyrinthe(longmax, liste_lignes.size());
+        this.laby = new Labyrinthe(liste_lignes.size(), longmax);
+        System.out.println(fichier);
+        System.out.println("Longmax : " + longmax + " lignesize : " + liste_lignes.size());
         for (int y = 0 ; y < liste_lignes.size() ; y++){
+            System.out.println("Y : " + y + "------");
             for (int x = 0; x < liste_lignes.get(y).length() ; x++) {
+                System.out.println("X : " + x + "------");
                 c = liste_lignes.get(y).charAt(x);
                 switch (c) {
                     case '#':
