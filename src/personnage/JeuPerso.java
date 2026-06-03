@@ -3,6 +3,8 @@ import Roles.Hero;
 import Roles.Monstre;
 import items.Epee;
 import items.Item;
+import items.KitSoins;
+import items.Piege;
 import jdk.jshell.execution.JdiExecutionControlProvider;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.Labyrinthe;
@@ -20,6 +22,7 @@ public class JeuPerso implements Jeu {
     private Labyrinthe laby;
     private ArrayList<Portail> portails = new ArrayList<>(0);
     private ArrayList<Item> items = new ArrayList<>(0);
+    static int niveau = 2;
 
     /**
      * Constructeur de Personnage, est une arrayList qui augmentera de capacité
@@ -50,6 +53,7 @@ public class JeuPerso implements Jeu {
         this.personnage = new ArrayList<>(0);
         this.laby = null;
         this.portails = new ArrayList<>(0);
+
         FileReader fr = new FileReader(fichier);
         BufferedReader br = new BufferedReader(fr);
         String ligne = br.readLine();
@@ -59,7 +63,6 @@ public class JeuPerso implements Jeu {
 
         while (ligne != null){
             liste_lignes.add(ligne);
-
             if (ligne.length() > longmax) longmax = ligne.length();
             ligne = br.readLine();
         }
@@ -80,20 +83,28 @@ public class JeuPerso implements Jeu {
                         nbmonstre++;
                         break;
                     case '{':
-                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau2.txt", "droite"));
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau" + niveau + ".txt", "droite"));
                         break;
                     case '_':
-                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "bas"));
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau" + niveau + ".txt", "bas"));
+
                         break;
                     case '}':
-                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "gauche"));
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau" + niveau + ".txt", "gauche"));
+
                         break;
                     case '-':
-                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau3.txt", "haut"));
+                        this.portails.add(new Portail(x, y, "src/labyrinthe/niveaux/Niveau" + niveau + ".txt", "haut"));
+
                         break;
                     case '/':
-
                         this.items.add(new Epee(x, y, 50));
+                        break;
+                    case '+':
+                        this.items.add(new KitSoins(x, y, 50));
+                        break;
+                    case '*':
+                        this.items.add(new Piege(x, y, 10));
                         break;
                     default:
                         this.laby.getMurs()[y][x] = false;
@@ -109,9 +120,9 @@ public class JeuPerso implements Jeu {
      * @throws IOException
      */
     public void recharger(String nomFichier) throws IOException {
+        niveau++;
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
-
 
         DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
         DessinPerso dp = new DessinPerso(this, this.personnage);
@@ -205,8 +216,6 @@ public class JeuPerso implements Jeu {
                 int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
                 Personnage pAttaque = personnageSurCetteCase(cooSuivante[0], cooSuivante[1]);
                 p.attaquer(pAttaque);
-                System.out.println("pv du hero : " + p.getPv());
-                System.out.println("pv du Monstre attaqué : " + pAttaque.getPv());
             }
         }
 
