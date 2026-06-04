@@ -23,7 +23,7 @@ public class MainPerso {
 
 
         JeuPerso jeu = new JeuPerso();
-        jeu.lireNiveaux(3);
+        jeu.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
 
         int hauteur = jeu.getLaby().getMurs().length;
         int largeur = jeu.getLaby().getMurs()[0].length;
@@ -35,7 +35,7 @@ public class MainPerso {
 
         DessinItem dessinItem = new DessinItem(jeu, jeu.getListeItems());
 
-        DessinPortail dessinPortail = new DessinPortail(jeu, jeu.getListePortails());
+        DessinPortail dessinPortail = new DessinPortail(jeu.getListePortails());
         Dessins dess = new Dessins();
 
         dess.ajouterDessin(dessinLabyrinthe);

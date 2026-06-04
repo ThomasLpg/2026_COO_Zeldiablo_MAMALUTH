@@ -13,15 +13,14 @@ import static labyrinthe.DessinLabyrinthe.TAILLE;
 
 public class DessinPortail implements DessinJeu {
     private ArrayList<Portail> liste_portails;
-    private Jeu jeu;
+
 
     /**
      * Permet de définir le portail à dessiner
-     * @param j
+
      * @param listePortail
      */
-    public DessinPortail(JeuPerso j, ArrayList<Portail> listePortail){
-        this.jeu = j;
+    public DessinPortail(ArrayList<Portail> listePortail){
         this.liste_portails = listePortail;
     }
 

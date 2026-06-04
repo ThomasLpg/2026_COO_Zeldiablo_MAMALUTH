@@ -139,13 +139,13 @@ public abstract class Personnage {
                 this.y = laby.getMurs().length-1;
                 break;
             case "bas" :
-                this.y = 0;
+                this.y = 1;
                 break;
             case "gauche":
-                this.x = laby.getMurs()[0].length;
+                this.x = laby.getMurs()[0].length-1;
                 break;
             case "droite" :
-                this.x = 0;
+                this.x = 1;
                 break;
         }
 

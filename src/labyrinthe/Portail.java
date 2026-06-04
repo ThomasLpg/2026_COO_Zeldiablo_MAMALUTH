@@ -7,6 +7,7 @@ import static labyrinthe.DessinLabyrinthe.TAILLE;
 public class Portail implements DessinJeu {
     int x, y;
     String niveauDestination;
+    int numNiveauDest;
     String orientation;
 
     /**
@@ -15,11 +16,15 @@ public class Portail implements DessinJeu {
      * @param ord coordonnée y du portail (case où est le portail)
      * @param destination niveau de destination
      */
-    public Portail(int abs, int ord, String destination, String orientation){
+    public Portail(int num, int abs, int ord, String destination, Labyrinthe lab){
+        this.numNiveauDest = num;
         this.x = abs;
         this.y = ord;
         this.niveauDestination = destination;
-        this.orientation = orientation;
+        if (abs == 0) this.orientation = "gauche";
+        if (abs == lab.getMurs()[0].length-1) this.orientation = "droite";
+        if (ord == 0) this.orientation = "haut";
+        if (ord == lab.getMurs().length-1) this.orientation = "bas";
     }
 
     /**
@@ -50,6 +55,10 @@ public class Portail implements DessinJeu {
         return y;
     }
 
+    public int getNumNiveauDest() {
+        return numNiveauDest;
+    }
+
     /**
      * Getter de l'orientation du portail
      * @return String haut / bas / gauche / droite
@@ -65,4 +74,6 @@ public class Portail implements DessinJeu {
     public String getDestination() {
         return niveauDestination;
     }
+
+
 }
