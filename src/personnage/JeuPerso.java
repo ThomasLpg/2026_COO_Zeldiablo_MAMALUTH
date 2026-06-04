@@ -124,7 +124,13 @@ public class JeuPerso implements Jeu {
     public void recharger(String nomFichier) throws IOException {
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
-        this.personnage.addFirst(h);
+        if (this.personnage.getFirst() instanceof Hero){
+            this.personnage.getFirst().setX(h.getX());
+            this.personnage.getFirst().setY(h.getY());
+        } else {
+            this.personnage.addFirst(h);
+        }
+
         DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
         DessinPerso dp = new DessinPerso(this, this.personnage);
         DessinItem di = new DessinItem(this, this.items);

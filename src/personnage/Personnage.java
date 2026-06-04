@@ -165,6 +165,14 @@ public abstract class Personnage {
         return(this.pv == 0);
     }
 
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
     /**
      * Permet d'ajouter de la vie au héros
      * @param vie
