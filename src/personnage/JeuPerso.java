@@ -1,10 +1,7 @@
 package personnage;
 import Roles.Hero;
 import Roles.Monstre;
-import items.Epee;
-import items.Item;
-import items.KitSoins;
-import items.Piege;
+import items.*;
 import jdk.jshell.execution.JdiExecutionControlProvider;
 import labyrinthe.DessinLabyrinthe;
 import labyrinthe.DessinPortail;
@@ -53,7 +50,12 @@ public class JeuPerso implements Jeu {
      */
     public void ajouterItem(Item i){this.items.add(i);}
 
-
+    public void lireNiveaux(int nbNiveau) throws IOException {
+        for (int i = 2 ; i <= nbNiveau ; i++){
+            this.lireFichier("src/labyrinthe/niveaux/Niveau" + i + ".txt");
+        }
+        this.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
+    }
     /**
      * lis le fichier txt qui définie un niveau, dans lequel se trouve des murs, un heros, des monstres
      * @param fichier txt à lire
@@ -85,9 +87,7 @@ public class JeuPerso implements Jeu {
             for (int x = 0; x < liste_lignes.get(y).length() ; x++) {
 
                 c = liste_lignes.get(y).charAt(x);
-
                 switch (c) {
-
                     case '#':
                         this.laby.getMurs()[y][x] = true;
                         break;
@@ -105,6 +105,7 @@ public class JeuPerso implements Jeu {
                         this.portails.add(new Portail(niveausuiv-2, x, y, "src/labyrinthe/niveaux/Niveau" + (niveausuiv - 2) + ".txt", this.laby));
                         break;
                     case '/':
+
                         this.items.add(new Epee(x, y, 50));
                         break;
                     case '+':
@@ -131,12 +132,15 @@ public class JeuPerso implements Jeu {
         this.lireFichier(nomFichier);
         DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
         DessinPerso dp = new DessinPerso(this, this.personnage);
+        DessinItem di = new DessinItem(this, this.items);
         DessinPortail dport = new DessinPortail(this.portails);
         JeuPrincipal.liste_dessins.ajouterDessin(ds);
         JeuPrincipal.liste_dessins.ajouterDessin(dp);
         JeuPrincipal.liste_dessins.ajouterDessin(dport);
         this.personnage.set(0, h);
 
+        JeuPrincipal.liste_dessins.ajouterDessin(di);
+        this.personnage.addFirst(h);
 
     }
 
@@ -177,7 +181,11 @@ public class JeuPerso implements Jeu {
 
         if(this.etrePersonnage(x, y)) return 1;
 
-        if (this.etrePortail(x, y)) return 2;
+        if(this.etrePortail(x, y)) return 2;
+
+        if(this.etreItem(x, y)) return 3;
+
+
 
         return 10;
     }
@@ -237,9 +245,18 @@ public class JeuPerso implements Jeu {
                         System.out.println("pv du Monstre attaqué : " + pAttaque.getPv());
                     }
                 }
+
+                if(verifsuivant(p.getX(), p.getY(), c) == 3){
+                    int cooSuivante[] = getSuivant(p.getX(), p.getY(),c);
+                    Item item = itemSurCetteCase(cooSuivante[0], cooSuivante[1]);
+                    if(item instanceof Epee) item.affecter((Hero) p);
+                    if(item instanceof KitSoins) item.affecter((Hero) p);
+                    if(item instanceof Piege) item.affecter((Hero) p);
+                    this.items.remove(item);
+                }
             }
             //Si c'est du vide, il s'y déplace librement
-            if (verifsuivant(p.getX(), p.getY(), c) == 10) {
+            if (verifsuivant(p.getX(), p.getY(), c) == 10 || verifsuivant(p.getX(), p.getY(), c) == 3) {
                 p.deplacer(c);
             } else {
                 deplacerDiagonale(c);
@@ -276,7 +293,7 @@ public class JeuPerso implements Jeu {
      * @return
      */
     public boolean etreFini(){
-        return false;
+        return (this.personnage.getFirst().getPv() == 0);
     }
 
     /**
@@ -368,6 +385,15 @@ public class JeuPerso implements Jeu {
         return null;
     }
 
+    public Item itemSurCetteCase(int x, int y){
+        for(Item i : this.items){
+            if(i.getX() == x && i.getY() == y){
+                return i;
+            }
+        }
+        return null;
+    }
+
     /**
      * Vérifie si une case aux coordonées x y est un portail ou non
      * @param x coordonnée  de la case
@@ -390,14 +416,13 @@ public class JeuPerso implements Jeu {
      * @param x coordonnée x de la case
      * @param y coordonnée y de la case
      */
-    public void etreItem(int x, int y){
-        boolean isItem = false;
+    public boolean etreItem(int x, int y){
         for(Item i: this.items){
             if(i.getX() == x && i.getY() == y){
-                isItem = true;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     /**
