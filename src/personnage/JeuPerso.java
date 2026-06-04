@@ -50,12 +50,6 @@ public class JeuPerso implements Jeu {
      */
     public void ajouterItem(Item i){this.items.add(i);}
 
-    public void lireNiveaux(int nbNiveau) throws IOException {
-        for (int i = 2 ; i <= nbNiveau ; i++){
-            this.lireFichier("src/labyrinthe/niveaux/Niveau" + i + ".txt");
-        }
-        this.lireFichier("src/labyrinthe/niveaux/Niveau1.txt");
-    }
     /**
      * lis le fichier txt qui définie un niveau, dans lequel se trouve des murs, un heros, des monstres
      * @param fichier txt à lire
@@ -130,6 +124,7 @@ public class JeuPerso implements Jeu {
     public void recharger(String nomFichier) throws IOException {
         Hero h = (Hero) this.getPj();
         this.lireFichier(nomFichier);
+        this.personnage.addFirst(h);
         DessinLabyrinthe ds = new DessinLabyrinthe(this.laby);
         DessinPerso dp = new DessinPerso(this, this.personnage);
         DessinItem di = new DessinItem(this, this.items);
@@ -137,10 +132,10 @@ public class JeuPerso implements Jeu {
         JeuPrincipal.liste_dessins.ajouterDessin(ds);
         JeuPrincipal.liste_dessins.ajouterDessin(dp);
         JeuPrincipal.liste_dessins.ajouterDessin(dport);
-        this.personnage.set(0, h);
-
         JeuPrincipal.liste_dessins.ajouterDessin(di);
-        this.personnage.addFirst(h);
+
+
+
 
     }
 
